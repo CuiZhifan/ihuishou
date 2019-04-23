@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:constant="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--扫描文件地址-->
+    <constant:component-scan base-package="
+    com.qianfeng.index.controller,
+    com.qianfeng.index.service,
+    com.qianfeng.info.controller,
+    com.qianfeng.info.service"/>
+
+    <aop:aspectj-autoproxy/>
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
+
+
+    <!--扫描Mapper地址-->
+    <bean id="mapperScan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="
+        com.qianfeng.index.mapper,
+        com.qianfeng.info.mapper"/>
+    </bean>
+
+
+    <!--配置连接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--value一盘是字符串数据赋值-->
+        <!--ref一般关联的是一个对象，需要new创建的对象-->
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ihuishou"/>
+        <property name="user" value="root"/>
+        <property name="password" value="243975"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源、连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.mapper.xml"/>
+    </bean>
+
+    <!--自动注入对象-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="objectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--返回对象时自动转Json-->
+    <bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
+          p:indentOutput="true"
+          p:simpleDateFormat="yyyy-MM-dd"/>
+
+    <!--拦截器-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:exclude-mapping path="/static/**"/>-->
+            <!--<mvc:exclude-mapping path="/font/**"/>-->
+            <!--&lt;!&ndash;<mvc:exclude-mapping path="/Login.jsp"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<mvc:exclude-mapping path="/user/login"/>&ndash;&gt;-->
+            <!--<bean class="com.qianfeng.commons.Intercepter.PermissionIntercepter"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--上传文件-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+        <!--设置上传文件的最大大小，单位byte，比如100000代表100KB-->
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="3000000"/>
+
+    </bean>
+</beans>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.info.mapper.IInfoMapper">
+
+    <resultMap id="QueryPropertyList" type="com.qianfeng.info.VO.TitleProperty">
+        <id property="estimateName" column="estimate_name" javaType="java.lang.String"/>
+        <result property="estimatePage" column="estimate_page" javaType="java.lang.Integer"/>
+        <collection property="infolist" ofType="com.qianfeng.info.VO.InfoProperty">
+            <id property="infoName" column="info_name" javaType="java.lang.String"/>
+            <result property="infoText" column="info_text" javaType="java.lang.String"/>
+            <result property="discountValue" column="discount_value" javaType="java.lang.Integer"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryPropertyByTypeId" resultMap="QueryPropertyList">
+        SELECT d2.estimate_name,d2.estimate_page,d1.info_name,d1.info_text,c.discount_value
+          from tb_discount c
+          join tb_estimate_info d1 on d1.info_id = c.info_id
+          join tb_estimate d2 on d2.estimate_id = d1.estimate_id
+          where c.type_id = #{typeId}
+    </select>
+
+    <resultMap id="queryHistoryMoneyById" type="com.qianfeng.info.VO.HistoryMoney">
+        <id property="money" column="history_money" javaType="java.lang.Integer"/>
+        <result property="date" column="history_time" javaType="java.sql.Date"/>
+    </resultMap>
+
+    <select id="queryHistoryMoneyById" resultMap="queryHistoryMoneyById">
+        select history_money,history_time
+            from tb_history
+            where type_id = #{typeId}
+            ORDER BY history_time DESC
+            limit 0,5
+    </select>
+
+    <resultMap id="queryTypeInfo" type="com.qianfeng.info.VO.TypeInfo">
+        <id property="typeId" column="type_id" javaType="java.lang.Integer"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+        <result property="typeMoney" column="type_money" javaType="java.lang.Integer"/>
+        <result property="typePic" column="type_pic" javaType="java.lang.String"/>
+        <result property="brandId" column="brand_id" javaType="java.lang.Integer"/>
+        <result property="brandName" column="brand_name" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="queryTypeInfoById" resultMap="queryTypeInfo">
+        select tb_type.brand_id,brand_name,type_id,type_name,type_money,type_pic
+            from tb_type
+            join tb_brand ON tb_brand.brand_id = tb_type.brand_id
+            where type_id = #{typeId};
+    </select>
+
+</mapper>

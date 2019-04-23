@@ -1,0 +1,42 @@
+package com.qianfeng.index.VO;
+
+import java.util.List;
+
+public class IndexBrand {
+    private int brandId;
+    private String brandName;
+    private List<IndexType> typeList;
+
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public List<IndexType> getTypeList() {
+        return typeList;
+    }
+
+    public void setTypeList(List<IndexType> typeList) {
+        this.typeList = typeList;
+    }
+
+    @Override
+    public String toString() {
+        return "IndexBrand{" +
+                "brandId=" + brandId +
+                ", brandName='" + brandName + '\'' +
+                ", typeList=" + typeList +
+                '}';
+    }
+}

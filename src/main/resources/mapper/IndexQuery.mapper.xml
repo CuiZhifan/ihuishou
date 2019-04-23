@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.index.mapper.IQueryMapper">
+    <resultMap id="baseResultMap" type="com.qianfeng.index.VO.IndexFQuery">
+        <id property="fname" column="fname" javaType="java.lang.String"/>
+        <collection property="clist" ofType="com.qianfeng.index.VO.IndexCQuery">
+            <id property="cname" column="cname" javaType="java.lang.String"/>
+            <result property="cinfo" column="cinfo" javaType="java.lang.String"/>
+            <result property="discount" column="discount" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="brand_typeResultMap" type="com.qianfeng.index.VO.IndexBrand">
+        <id property="brandId" column="brandId" javaType="java.lang.Integer"/>
+        <result property="brandName" column="brandName" javaType="java.lang.String"/>
+        <collection property="typeList" ofType="com.qianfeng.index.VO.IndexType">
+            <id property="typeId" column="typeId" javaType="java.lang.Integer"/>
+            <result property="typeName" column="typeName" javaType="java.lang.String"/>
+            <result property="totleMoney" column="totleMoney" javaType="java.lang.Integer"/>
+            <result property="typePic" column="typePic" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="brandResultMap" type="com.qianfeng.index.VO.IndexBrand">
+        <id property="brandId" column="brandId" javaType="java.lang.Integer"/>
+        <result property="brandName" column="brandName" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="typeResultMap" type="com.qianfeng.index.VO.IndexType">
+        <id property="typeId" column="typeId" javaType="java.lang.Integer"/>
+        <result property="typeName" column="typeName" javaType="java.lang.String"/>
+        <result property="typePic" column="typePic" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="indexQueryByPhone" resultMap="baseResultMap">
+        SELECT d2.estimate_name as fname,d1.info_name as cname,d1.info_text as cinfo,c.discount_value as discount
+            from tb_discount c
+            join tb_estimate_info d1 on d1.info_id = c.info_id
+            join tb_estimate d2 on d2.estimate_id = d1.estimate_id
+            where c.type_id = #{infoId}
+    </select>
+
+    <select id="indexQueryAllType" resultMap="brand_typeResultMap">
+        select b.brand_id as brandId,b.brand_name as brandName,t.type_id as typeId,t.type_name as typeName,t.type_pic as typePic
+        from tb_brand b
+        left join tb_type t on b.brand_id=t.brand_id
+        <if test="brandId > 0">
+            <where>brand_id = #{brandId}</where>
+        </if>
+    </select>
+
+    <select id="indexQueryBrand" resultMap="brandResultMap">
+        select brand_id as brandId,brand_name as brandName from tb_brand;
+    </select>
+
+    <select id="indexQueryType" resultMap="typeResultMap">
+        select type_id as typeId,type_name as typeName,type_pic as typePic from tb_type
+        <if test="brandId > 0">
+            <where>brand_id = #{brandId}</where>
+        </if>
+    </select>
+
+    <select id="queryTypesByName" resultMap="typeResultMap">
+        select type_id as typeId,type_name as typeName,type_pic as typePic
+            from tb_type
+            join tb_brand ON tb_brand.brand_id = tb_type.brand_id
+            where type_name like #{word}
+    </select>
+</mapper>
