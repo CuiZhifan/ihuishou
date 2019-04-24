@@ -1,5 +1,6 @@
 package com.qianfeng;
 
+import com.qianfeng.index.VO.GetDate;
 import com.qianfeng.info.VO.HistoryMoney;
 import com.qianfeng.info.VO.TitleProperty;
 import com.qianfeng.info.VO.TypeInfo;
@@ -41,5 +42,16 @@ public class TestInfo {
     public void testCase3(){
         TypeInfo typeInfo = mapper.queryTypeInfoById(5);
         System.out.println(typeInfo);
+    }
+
+    @Test
+    public void testCase4(){
+        GetDate date = new GetDate();
+        date.setGid(1);
+        date.setPackage_id(0);
+        date.setProperty_ids("3,6,7,12,14,19,33,36,39,42");
+        date.setDesc_ids("20,21,22,23,25");
+        date.setPj_ids("0,47,48,49,50");
+        service.returnMoney(date);
     }
 }

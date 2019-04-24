@@ -8,14 +8,15 @@
         <id property="estimateName" column="estimate_name" javaType="java.lang.String"/>
         <result property="estimatePage" column="estimate_page" javaType="java.lang.Integer"/>
         <collection property="infolist" ofType="com.qianfeng.info.VO.InfoProperty">
-            <id property="infoName" column="info_name" javaType="java.lang.String"/>
+            <id property="infoId" column="info_id" javaType="java.lang.Integer"/>
+            <result property="infoName" column="info_name" javaType="java.lang.String"/>
             <result property="infoText" column="info_text" javaType="java.lang.String"/>
-            <result property="discountValue" column="discount_value" javaType="java.lang.Integer"/>
+            <result property="discountValue" column="discount_value" javaType="java.lang.String"/>
         </collection>
     </resultMap>
 
     <select id="queryPropertyByTypeId" resultMap="QueryPropertyList">
-        SELECT d2.estimate_name,d2.estimate_page,d1.info_name,d1.info_text,c.discount_value
+        SELECT d2.estimate_name,d2.estimate_page,d1.info_id,d1.info_name,d1.info_text,c.discount_value
           from tb_discount c
           join tb_estimate_info d1 on d1.info_id = c.info_id
           join tb_estimate d2 on d2.estimate_id = d1.estimate_id
@@ -49,6 +50,22 @@
             from tb_type
             join tb_brand ON tb_brand.brand_id = tb_type.brand_id
             where type_id = #{typeId};
+    </select>
+
+    <resultMap id="getMoney" type="com.qianfeng.info.DTO.GetMoney">
+        <result property="discount" column="discount_value" javaType="java.lang.String"/>
+        <result property="infoName" column="info_name" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="getMoney" resultMap="getMoney">
+        select discount_value,info_name
+        from tb_discount d
+        join tb_estimate_info i ON d.info_id = i.info_id
+        where type_id = #{typeId}
+        and d.info_id in (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        );
     </select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.qianfeng.info.mapper;
 
+import com.qianfeng.info.DTO.GetMoney;
 import com.qianfeng.info.VO.HistoryMoney;
 import com.qianfeng.info.VO.TitleProperty;
 import com.qianfeng.info.VO.TypeInfo;
@@ -15,4 +16,6 @@ public interface IInfoMapper {
     List<HistoryMoney> queryHistoryMoneyById(@Param("typeId") int typeId);
 
     TypeInfo queryTypeInfoById(@Param("typeId") int typeId);
+
+    List<GetMoney> getMoney(@Param("typeId") int typeId,@Param("ids") String[] ids);
 }

@@ -11,7 +11,9 @@
     com.qianfeng.index.controller,
     com.qianfeng.index.service,
     com.qianfeng.info.controller,
-    com.qianfeng.info.service"/>
+    com.qianfeng.info.service,
+    com.qianfeng.Price.controller,
+    com.qianfeng.Price.service"/>
 
     <aop:aspectj-autoproxy/>
     <mvc:annotation-driven/>
@@ -23,7 +25,8 @@
     <bean id="mapperScan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="
         com.qianfeng.index.mapper,
-        com.qianfeng.info.mapper"/>
+        com.qianfeng.info.mapper,
+        com.qianfeng.Price.mapper"/>
     </bean>
 
 

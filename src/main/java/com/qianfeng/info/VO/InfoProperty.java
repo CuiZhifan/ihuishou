@@ -3,17 +3,27 @@ package com.qianfeng.info.VO;
 import java.util.List;
 
 public class InfoProperty {
+    private int infoId;
     private String infoName;
     private String infoText;
-    private int discountValue;
+    private String discountValue;
 
     @Override
     public String toString() {
         return "InfoProperty{" +
+                "infoId='" + infoId + '\'' +
                 "infoName='" + infoName + '\'' +
                 ", infoText='" + infoText + '\'' +
                 ", discountValue=" + discountValue +
                 '}';
+    }
+
+    public int getInfoId() {
+        return infoId;
+    }
+
+    public void setInfoId(int infoId) {
+        this.infoId = infoId;
     }
 
     public String getInfoName() {
@@ -32,11 +42,11 @@ public class InfoProperty {
         this.infoText = infoText;
     }
 
-    public int getDiscountValue() {
+    public String getDiscountValue() {
         return discountValue;
     }
 
-    public void setDiscountValue(int discountValue) {
+    public void setDiscountValue(String discountValue) {
         this.discountValue = discountValue;
     }
 }

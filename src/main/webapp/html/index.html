@@ -164,12 +164,12 @@
                 <dl class="pic_list">
                     <dd v-for="type in types">
                         <div class="pic_list_box">
-                            <div class="pic_list_img"><a href="/ihuishou/html/info.html" :title="type.typeName+'回收价格评估'"><img
+                            <div class="pic_list_img"><a :href="'/ihuishou/html/info.html?typeId='+type.typeId" :title="type.typeName+'回收价格评估'"><img
                                     :src="'http://localhost:80/ihuishou/'+type.typePic" width="180"
                                     height="135" :alt="type.typeName+'闲置回收价格评估'"/></a></div>
                             <p class="name">{{type.typeName}}</p>
                             <!--<p class="price">回收价：<em>￥3080</em></p>-->
-                            <p class="pinggu"><a href="/ihuishou/html/info.html" :title="'在线评估'+type.typeName+'回收价格'"><!--去评估--></a>
+                            <p class="pinggu"><a :href="'/ihuishou/html/info.html?typeId='+type.typeId" :title="'在线评估'+type.typeName+'回收价格'"><!--去评估--></a>
                             </p>
                             <div class="hot"><img src="../images/hot.png"/></div>
                         </div>
@@ -328,7 +328,10 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+
+
 <script type="text/javascript">
+
     function GetQueryString(name)
     {
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -336,6 +339,7 @@
         if(r!=null)return  unescape(r[2]); return null;
     }
     var id = GetQueryString("brandId");
+    var name = GetQueryString("name");
     new Vue({
         el:"#allBrand",
         data:{
@@ -343,10 +347,8 @@
             types:null
         },
         mounted(){
-            // axios.get("http://localhost:8080/ihuishou/index/brand")
-            //     .then(response => {this.brands = response.data.brands});
-            var url = "http://localhost:8080/ihuishou/index/type/"+id;
-            axios.get(url)
+            var url = "http://localhost:8080/ihuishou/index/type/"+id+"-"+name;
+            axios.post(url)
                 .then(response => {
                     this.types = response.data[1];
                     this.brands = response.data[0];

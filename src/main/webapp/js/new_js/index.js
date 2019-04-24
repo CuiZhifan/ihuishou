@@ -105,7 +105,13 @@ function	top_search_goods(){
 		//alert("请输入品牌型号");
 		//return false;
 	}
-	$("#top_goods_search").submit();
+	$.ajax({
+		url:"http://localhost:8080/ihuishou/index/type/setSession/"+val,
+        success:function (data) {
+            window.location.href="http://localhost:8080/ihuishou/html/index.html?brandId=0&name="+data;
+        }
+	});
+	// $("#top_goods_search").submit();
 }
 
 function t_click(obj,val){

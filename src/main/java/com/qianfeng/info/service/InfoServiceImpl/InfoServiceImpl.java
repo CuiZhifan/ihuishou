@@ -1,5 +1,7 @@
 package com.qianfeng.info.service.InfoServiceImpl;
 
+import com.qianfeng.index.VO.GetDate;
+import com.qianfeng.info.DTO.GetMoney;
 import com.qianfeng.info.VO.HistoryMoney;
 import com.qianfeng.info.VO.TitleProperty;
 import com.qianfeng.info.VO.TypeInfo;
@@ -57,4 +59,40 @@ public class InfoServiceImpl implements IInfoService {
         TypeInfo typeInfo = mapper.queryTypeInfoById(typeId);
         return typeInfo;
     }
+
+    @Override
+    public List returnMoney(GetDate date) {
+//        读取参数
+        int typeId = date.getGid();
+        String infos = (date.getProperty_ids()+","+date.getDesc_ids()+","+date.getPj_ids()).replace(",,",",").replace(",0,",",");
+//        获取总折扣
+        String[] ids = infos.split(",");
+        List<GetMoney> monies = mapper.getMoney(typeId, ids);
+        double pct = 1;int count = 0;String infoName = "";String AAA = "";
+        for (GetMoney m:monies){
+            String discount = m.getDiscount();
+            infoName += AAA;
+            infoName += m.getInfoName();
+            AAA = ",";
+            if(discount.startsWith("%")){
+                pct = pct * Double.parseDouble(discount.replace("%",""));
+            }else {
+                count += Integer.parseInt(discount);
+            }
+        }
+//        获取原价
+        int money = mapper.queryTypeInfoById(typeId).getTypeMoney();
+//        计算价格
+        money = (int) ((money-count)*pct);
+        if(money<5000){
+            money = 5000;
+        }
+        money = money/100;
+        List list = new ArrayList();
+        list.add(money);
+        list.add(infoName);
+        return list;
+    }
+
+
 }

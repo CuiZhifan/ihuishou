@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>iphone 7-回购网 -  手机回收网 | 二手手机交易 | 笔记本回收 | 平板回收</title>
@@ -25,26 +25,26 @@ function selectcity(url){
 <script src="../js/new_js/new_goods.js" type="text/javascript"></script>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="../css/alert_zhe.css" />
-<script type="text/javascript" src="../js/alert_zhe.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="../css/alert_zhe.css" />-->
+<!--<script type="text/javascript" src="../js/alert_zhe.js"></script>-->
 <!--头部-->
 <!--手机回收-->
 <input type="hidden" id="sn" value="00676fdb772fb0a63796fb07b4f134ef" />
 <input type="hidden" id="sign" value="f237947533d00f1e7cd0c75f17e958ec"  />
-<div class="recovery">
+<div class="recovery" id="VUE">
   <div class="page2">
     <div class="heat_l" style="width:276px;">
-      <div class="heat_img"><img src="http://img.ihuigo.com/goods/739b3910f020832305a94a6a96eec952.jpg" width="264" height="197" /></div>
+      <div class="heat_img"><img v-bind:src="type.typePic" width="264" height="197" /></div>
     </div>
     <div class="heat_new">
     	<input type="hidden" name="typeid" id="typeid" value="1" />
       <dl>
-        <dt><span>请选择一种回购方式</span><a href="goods/info/21025.html">重新评估</a></dt>
-        <dd class="clearfix heat_on" name="1">
+        <dt><span>请选择一种回购方式</span><a v-bind:href="reUrl">重新评估</a></dt>
+        <dd class="clearfix heat_on" v-bind:name="type.typeId">
           <div class="heat_yellow"> <img src="../images/new_jian.png" class="new_jian" />
             <div class="yellow_l"> <a href="javascript:;" class="new_gou new_gou2"></a> <span class="new_icon1">现金</span> </div>
             <div class="yellow_r"> <span>全网最高</span>
-              <div id="pg_price" class="digits"></div>
+              <div id="pg_price" class="digits">{{type.discount}}</div>
               <span>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;官方直收</span>
               <div class="clear"></div>
             </div>
@@ -56,7 +56,7 @@ function selectcity(url){
 
     </div>
     <script>
-		load_show_price_extends('ajax/load_show_price.html');
+		// load_show_price_extends('ajax/load_show_price.html');
 		 /*==选择==*/
 	   $(".heat_new dd").click(function() {
 		   $("#typeid").val($(this).attr('name'));
@@ -254,8 +254,34 @@ function goshuangdan(check_url,gourl){
 <script>
 $(function(){
     _nav('nav_s',2,3);
-    show_goods_review('goods/new_review/?gid=21025.html');
+    // show_goods_review('goods/new_review/?gid=21025.html');
 });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var key = GetQueryString("key");
+    new Vue({
+        el:"#VUE",
+        data:{
+            type:null,
+            reUrl:null
+        },
+        mounted(){
+            var url = "http://localhost:8080/ihuishou/price/getInfo/"+key;
+            axios.post(url)
+                .then(response => {
+                    this.type = response.data;
+                    this.reUrl = "http://localhost:8080/ihuishou/html/info.html?typeId="+response.data.typeId;
+                })
+        }
+    })
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.qianfeng.info.service;
 
+import com.qianfeng.index.VO.GetDate;
 import com.qianfeng.info.VO.HistoryMoney;
 import com.qianfeng.info.VO.TypeInfo;
 
@@ -11,4 +12,6 @@ public interface IInfoService {
     List<HistoryMoney> queryHistoryMoneyById(int typeId);
 
     TypeInfo queryTypeInfoById(int typeId);
+
+    List returnMoney(GetDate date);
 }

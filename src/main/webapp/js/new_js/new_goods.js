@@ -15,7 +15,7 @@ function	pj_click(obj,pj_id){
 			pj_ids	+=	suffix+$(this).val();
 			suffix	=	',';
 	})
-	$("#pj_ids").val(pj_ids);
+	$("#pj_pid").val(pj_ids);
 }
 
 //属性点击事件
@@ -28,7 +28,7 @@ function	property_click(obj,suffix,property_id){
     auto_go_next(obj);
 }
 //描叙点击事件
-function	item_click(obj,suffix,money){
+function	item_click(obj,suffix){
     var name			=	$(obj).attr('name');
     var current_class	=	$(obj).attr('class');
     if(current_class	==	'selected'){
@@ -36,8 +36,8 @@ function	item_click(obj,suffix,money){
         $("#desc_id_"+suffix).val(0);
     }else {
         $(obj).attr('class','selected');
-        $("#desc_id_"+suffix).val(money);
-	}
+        $("#desc_id_"+suffix).val(suffix);
+    }
 /*	var default_id	=	arguments[3] ? arguments[3] : desc_id;
 	if(default_id	!=	desc_id){		//可多选时
 		var name			=	$(obj).attr('name');
@@ -74,6 +74,7 @@ function	item_click(obj,suffix,money){
 	//自动下一步
 	auto_go_next(obj);
 	btn_step2_next_html();*/
+    btn_step2_next_html();
 }
 
 function auto_go_next(obj){
@@ -88,9 +89,9 @@ function auto_go_next(obj){
 function btn_step2_next_html(){
 	var n	=	$("#property_step2").find(".selected").length;
 	if(n	==	0){
-		$("#btn_step2_next").html('都没问题，跳过');
+		$("#btn_step2_next").text('都没问题，跳过');
 	}else{
-		$("#btn_step2_next").html('下一步');
+		$("#btn_step2_next").text('下一步');
 	}
 }
 
@@ -113,26 +114,26 @@ function new_show_price(url,act,func,elem_id,ifhuanxin){
 	}
 	var desc_flag	=	true;
 	$("input[name='desc_id[]']").each(function(){
-		if($(this).val()==0){
-			desc_flag	=	false;
-			return false;
-		}
+		// if($(this).val()==0){
+		// 	desc_flag	=	false;
+		// 	return false;
+		// }
 		desc_ids	+=	dsuffix+$(this).val();
 		dsuffix		=	',';
 	})
-	if( ! desc_flag){
-		alert("请选择评估参数");
-		return false;
-	}
+	// if( ! desc_flag){
+	// 	alert("请选择评估参数");
+	// 	return false;
+	// }
 
-	if(desc_ids.length	==	0){
-		alert("无评估参数");
-		return false;
-	}
+	// if(desc_ids.length	==	0){
+	// 	// alert("无评估参数");
+	// 	// return false;
+	// }
 	func			=	typeof(func)=='undefined'?'add':func;
 	var gid			=	$("#gid").val();
 	var package_id	=	$("#package_id").val();
-	var pj_ids		=	$("#pj_ids").val();
+	var pj_ids		=	$("#pj_pid").val();
 	var shop_id		=	$("#shop_id").val();
 	//防止频繁操作
 	if($("#if_show_price")	==	0)	return false;
@@ -140,13 +141,16 @@ function new_show_price(url,act,func,elem_id,ifhuanxin){
 	if(act	==	'show_price'){		//查看价格
 		var view	=	$("#view").val();	//视图文件
 		if(view	==	'goods_info')	$("#loading_div").css('display','block');
-		$.post(url,{'gid':gid,'package_id':package_id,'property_ids':property_ids,'desc_ids':desc_ids,'pj_ids':pj_ids},function(data){
+		//查看参数
+		// alert(gid+"-"+package_id+"-"+property_ids+"-"+desc_ids+"-"+pj_ids)
+		$.post(url,{'gid':gid,'package_id':package_id,'property_ids':property_ids,'desc_ids':desc_ids,'pj_ids':pj_ids},
+			function(data){
 			$("#if_show_price").val(1);	//解锁
-			//alert(data);
+			// alert(data);
 			var obj	=	eval(data);
 			if(obj[0]	==	1){
 				var key			=	obj[1];
-				var gourl		=	url.replace("ajax/new_get_pg_price","goods/show_price/"+key);
+				var gourl		=	url.replace("http://localhost:8080/ihuishou/info/getDate","http://localhost:8080/ihuishou/price/"+key);
 				location.href	=	gourl;
 				return;
 			}else{
@@ -157,7 +161,9 @@ function new_show_price(url,act,func,elem_id,ifhuanxin){
 		if(func	==	'sub')	$("#btn_sub_cart").attr('disabled','disabled');
 		var ifjia	=	$("#ifjia").val();
 
-		$.post(url,{'gid':gid,'package_id':package_id,'property_ids':property_ids,'desc_ids':desc_ids,'pj_ids':pj_ids,'func':func,'ifjia':ifjia,'shop_id':shop_id},function(data){
+		$.post(url,
+			{'gid':gid,'package_id':package_id,'property_ids':property_ids,'desc_ids':desc_ids,'pj_ids':pj_ids,'func':func,'ifjia':ifjia,'shop_id':shop_id},
+			function(data){
 			var obj	=	eval(data);
 			//提交回购单操作
 			if(func	==	'sub'){
