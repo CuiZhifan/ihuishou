@@ -234,7 +234,7 @@
               ret.label = this.options.xLabelFormat(ret);
             }
           }
-		  ret.label = ret.label+'月';
+		  ret.label = 5-index;//ret.label+'月';
           total = 0;
           ret.y = (function() {
             var _j, _len1, _ref, _results1;

@@ -46,10 +46,17 @@ public class infoController {
         info.add(date.getGid());
         info.add(money);
         info.add(infos);
+        if(date.getPackage_id()<0){
+            info.add(service.addTemporaryWorker());
+        }else {
+            info.add(date.getPackage_id());
+        }
         String key = UUID.randomUUID().toString().replace("-","").substring(0,10);
         session.setAttribute(key,info);
         list.add("1");
         list.add(key);
         return list;
     }
+
+
 }

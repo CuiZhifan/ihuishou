@@ -68,4 +68,8 @@
         );
     </select>
 
+    <insert id="addTemporaryWorker" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" parameterType="com.qianfeng.Price.PO.GetId">
+        insert into tb_user(user_level) VALUES (-1);
+    </insert>
+
 </mapper>

@@ -69,4 +69,6 @@ public class PriceTypeInfo {
     public void setKey(String key) {
         this.key = key;
     }
+
+
 }

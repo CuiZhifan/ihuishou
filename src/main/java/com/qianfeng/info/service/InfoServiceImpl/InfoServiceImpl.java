@@ -1,5 +1,6 @@
 package com.qianfeng.info.service.InfoServiceImpl;
 
+import com.qianfeng.Price.PO.GetId;
 import com.qianfeng.index.VO.GetDate;
 import com.qianfeng.info.DTO.GetMoney;
 import com.qianfeng.info.VO.HistoryMoney;
@@ -64,8 +65,9 @@ public class InfoServiceImpl implements IInfoService {
     public List returnMoney(GetDate date) {
 //        读取参数
         int typeId = date.getGid();
-        String infos = (date.getProperty_ids()+","+date.getDesc_ids()+","+date.getPj_ids()).replace(",,",",").replace(",0,",",");
-//        获取总折扣
+        String infos = (date.getProperty_ids()+","+date.getDesc_ids()+","+date.getPj_ids()).replace(",,",",");
+        infos = infos.replace(",0,",",");
+        //        获取总折扣
         String[] ids = infos.split(",");
         List<GetMoney> monies = mapper.getMoney(typeId, ids);
         double pct = 1;int count = 0;String infoName = "";String AAA = "";
@@ -92,6 +94,13 @@ public class InfoServiceImpl implements IInfoService {
         list.add(money);
         list.add(infoName);
         return list;
+    }
+
+    @Override
+    public int addTemporaryWorker() {
+        GetId getId1 = new GetId();
+        mapper.addTemporaryWorker(getId1);
+        return getId1.getUserId();
     }
 
 

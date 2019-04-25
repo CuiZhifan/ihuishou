@@ -267,7 +267,7 @@ function new_addcart(url,act,key){
 				html	+=	'<td><em>￥ '+item_info['price']+'</em></td>';
 				html	+=	' </tr>';
 				//alert(html);
-				$("#cart_tr_title").after(html);
+				$("#ADDCART").after(html);
 
 				alert("已加入回购车");
 			}else if(obj[0]	==	2){

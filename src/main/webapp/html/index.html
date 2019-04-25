@@ -159,7 +159,7 @@
             <!--全部手机品牌-->
             <div class="search_main">
                 <div class="search_title"><h2 class="list-item">手机回收</h2>&nbsp;&nbsp;&nbsp;&nbsp;<em></em>搜索到<em>
-                    1852 </em>个结果
+                    {{length}} </em>个结果
                 </div>
                 <dl class="pic_list">
                     <dd v-for="type in types">
@@ -344,7 +344,8 @@
         el:"#allBrand",
         data:{
             brands:null,
-            types:null
+            types:null,
+            length:null
         },
         mounted(){
             var url = "http://localhost:8080/ihuishou/index/type/"+id+"-"+name;
@@ -352,6 +353,7 @@
                 .then(response => {
                     this.types = response.data[1];
                     this.brands = response.data[0];
+                    this.length = this.types.length;
                 })
         }
     });

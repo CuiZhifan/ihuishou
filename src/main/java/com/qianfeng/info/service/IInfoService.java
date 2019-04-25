@@ -14,4 +14,6 @@ public interface IInfoService {
     TypeInfo queryTypeInfoById(int typeId);
 
     List returnMoney(GetDate date);
+
+    int addTemporaryWorker();
 }

@@ -54,4 +54,9 @@ public class TestInfo {
         date.setPj_ids("0,47,48,49,50");
         service.returnMoney(date);
     }
+
+    @Test
+    public void testCase5(){
+
+    }
 }

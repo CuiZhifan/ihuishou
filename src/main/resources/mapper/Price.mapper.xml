@@ -15,4 +15,40 @@
             from tb_type
             where type_id = #{typeId}
     </select>
+
+    <select id="queryCartNum" resultType="com.qianfeng.Price.DTO.QueryChart">
+        SELECT COUNT(*) as cart_total_items,SUM(order_price) as cart_total from tb_order where order_status = 0 and user_id = #{userId};
+    </select>
+
+    <delete id="removeCart">
+        DELETE FROM tb_order where order_id = #{orderId} AND order_status = 0
+    </delete>
+
+    <resultMap id="CartInfoResultMap" type="com.qianfeng.Price.VO.ReturnCart">
+        <id property="rowid" column="order_id" javaType="java.lang.String"/>
+        <result property="name" column="type_name" javaType="java.lang.String"/>
+        <result property="img" column="type_pic" javaType="java.lang.String"/>
+        <result property="price" column="order_price" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <select id="queryCartInfo" resultMap="CartInfoResultMap">
+        SELECT order_id,type_name,type_pic,order_price
+        from tb_order
+        join tb_type on order_phone_type = type_id
+        where order_status = 0 and user_id = #{userId};
+    </select>
+
+    <resultMap id="queryTypeInfo" type="com.qianfeng.Price.DTO.TypeInfo">
+        <result property="pic" column="type_pic" javaType="java.lang.String"/>
+        <result property="name" column="type_name" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="queryUser" type="com.qianfeng.Price.DTO.GetUserId">
+        <id property="userId" column="user_id" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <select id="getUserById" resultMap="queryUser">
+        select user_id from tb_order where order_id = #{orderId};
+    </select>
+
 </mapper>

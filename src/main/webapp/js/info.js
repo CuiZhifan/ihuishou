@@ -20,6 +20,17 @@ $.ajax({
         page3 = data[2];
         historymoney = data[3];
         phone = data[4];
+
+        var day_data = historymoney;
+        Morris.Line({
+            element: 'graph',
+            data: day_data,
+            xkey: 'date',
+            ykeys: ['money'],
+            labels: ['价格'],
+            parseTime: false
+        });
+
         $("#top-a").attr("href","http://localhost:8080/ihuishou/index/"+phone.brandId);
         $("#top-a").text(phone.brandName);
         $("#top-span").text(phone.typeName);
