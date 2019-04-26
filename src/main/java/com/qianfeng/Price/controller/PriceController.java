@@ -49,8 +49,8 @@ public class PriceController {
     @RequestMapping("/removeCart/{orderId}")
     @ResponseBody
     public List removeCart(@PathVariable("orderId") String orderId){
-        int i = service.removeCart(orderId);
         GetUserId userId = service.getUserById(orderId);
+        int i = service.removeCart(orderId);
         QueryChart chart = service.queryCartNum(userId.getUserId());
         List list = new ArrayList();
         list.add(i);
@@ -61,6 +61,7 @@ public class PriceController {
     @RequestMapping("/addCart")
     @ResponseBody
     public List addCart(PriceCart cart,HttpSession session){
+        service.addCart(cart,session);
         //获取session中的信息
         List attribute = (List) session.getAttribute(cart.getKey());
         //新建返回集合
@@ -71,23 +72,22 @@ public class PriceController {
         QueryChart queryChart = service.queryCartNum(userId);
         result.add(queryChart);
         //新建第三个数据
-        ReturnCart returnCart = new ReturnCart();
-            //添加相关信息
-        returnCart.setRowid(UUID.randomUUID().toString().replace("-","").substring(0,20));
-        //获取ID
-        int id = cart.getTypeid();
-            //查询ID对应的信息
-        PriceTypeInfo info = service.queryTypeInfo(id);
-        returnCart.setImg(info.getTypePic());
-        returnCart.setName(info.getTypeName());
-        //获取session中的价格
-        returnCart.setPrice((Integer) attribute.get(1));
-        System.out.println(returnCart);
-        result.add(returnCart);
-//        //新建第三个数据
-//        List attribute = (List) session.getAttribute(cart.getKey());
-//        List<ReturnCart> carts = service.queryCartInfo((Integer) attribute.get(3));
-//        result.add(cart);
+//        ReturnCart returnCart = new ReturnCart();
+//            //添加相关信息
+//        returnCart.setRowid(UUID.randomUUID().toString().replace("-","").substring(0,20));
+//        //获取ID
+//        int id = cart.getTypeid();
+//            //查询ID对应的信息
+//        PriceTypeInfo info = service.queryTypeInfo(id);
+//        returnCart.setImg(info.getTypePic());
+//        returnCart.setName(info.getTypeName());
+//        //获取session中的价格
+//        returnCart.setPrice((Integer) attribute.get(1));
+//        System.out.println(returnCart);
+//        result.add(returnCart);
+        //新建第三个数据
+        List<ReturnCart> carts = service.queryCartInfo((Integer) attribute.get(3));
+        result.add(carts);
         return result;
     }
 

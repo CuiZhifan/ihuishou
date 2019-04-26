@@ -13,7 +13,9 @@
     com.qianfeng.info.controller,
     com.qianfeng.info.service,
     com.qianfeng.Price.controller,
-    com.qianfeng.Price.service"/>
+    com.qianfeng.Price.service,
+    com.qianfeng.User.Controller,
+    com.qianfeng.User.Service"/>
 
     <aop:aspectj-autoproxy/>
     <mvc:annotation-driven/>
@@ -26,7 +28,8 @@
         <property name="basePackage" value="
         com.qianfeng.index.mapper,
         com.qianfeng.info.mapper,
-        com.qianfeng.Price.mapper"/>
+        com.qianfeng.Price.mapper,
+        com.qianfeng.User.Mapper"/>
     </bean>
 
 

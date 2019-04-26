@@ -1,5 +1,6 @@
 package com.qianfeng;
 
+import com.qianfeng.Price.DTO.CartInfo;
 import com.qianfeng.Price.DTO.QueryChart;
 import com.qianfeng.Price.PO.GetId;
 import com.qianfeng.Price.VO.PriceTypeInfo;
@@ -12,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
@@ -30,7 +34,7 @@ public class TestPrice {
 
     @Test
     public void testCase1(){
-        QueryChart chart = service.queryCartNum(18);
+        QueryChart chart = service.queryCartNum(24);
         System.out.println(chart);
     }
 
@@ -47,6 +51,14 @@ public class TestPrice {
 
     @Test
     public void testCase4(){
-
+        CartInfo cartInfo = new CartInfo();
+        cartInfo.setOrderId(UUID.randomUUID().toString().replace("-", "").substring(0,20));
+        cartInfo.setUserId(1);
+        cartInfo.setOrderPrice(2000);
+        cartInfo.setOrderEstimates("QAQ");
+        cartInfo.setOrderStatus(0);
+        cartInfo.setOrderCreateTime(new Timestamp(new Date().getTime()));
+        cartInfo.setOrderPhoneType(1);
+        mapper.addCart(cartInfo);
     }
 }

@@ -251,24 +251,29 @@ function new_addcart(url,act,key){
 				$(".cart_total_items").html(arr['cart_total_items']);
 				$("#cart_total").html('￥'+arr['cart_total']);
 
-				//添加商品信息
-				var item_info	= obj[2];
-				var item_class	=	arr['cart_total_items']%2==0?'':'class="on"';
-				var item_id		=	'cart_items_'+item_info['rowid'];
+				var infos = obj[2];
+				var length = infos.length;
 
-				var html=	'';
+                $(".NEWCART").remove();
+                for(var i=0;i<length;i++){
+                    //添加商品信息
+                    var item_info	= infos[i];
+                    var item_class	=	arr['cart_total_items']%2==0?'':'class="on"';
+                    var item_id		=	'cart_items_'+item_info['rowid'];
 
-				html	+=	'<tr id="'+item_id+'">';
-				html	+=	'<td class="table-padding">';
-				html	+=	'<div class="mui-pic">';
-				html	+=	'<a href="javascript:remove_cart(\''+item_info['remove_url']+'\',\''+item_info['rowid']+'\')" class="close_btn"><img src="'+item_info['base_url']+'images/close.png" /></a>';
-				html	+=	'<a href="javascript:void(0)"><img src="'+item_info['img']+'"  width="74" height="56"/></a></div></td>';
-				html	+=	'<td><p><a href="javascript:void(0)">'+item_info['name']+'</a></p></td>';
-				html	+=	'<td><em>￥ '+item_info['price']+'</em></td>';
-				html	+=	' </tr>';
-				//alert(html);
-				$("#ADDCART").after(html);
+                    var html=	'';
 
+                    html	+=	'<tr id="'+item_id+'" class="NEWCART">';
+                    html	+=	'<td class="table-padding">';
+                    html	+=	'<div class="mui-pic">';
+                    html	+=	'<a href="javascript:remove_cart(\''+item_info['remove_url']+'\',\''+item_info['rowid']+'\')" class="close_btn"><img src="'+item_info['base_url']+'images/close.png" /></a>';
+                    html	+=	'<a href="javascript:void(0)"><img src="'+item_info['img']+'"  width="74" height="56"/></a></div></td>';
+                    html	+=	'<td><p><a href="javascript:void(0)">'+item_info['name']+'</a></p></td>';
+                    html	+=	'<td><em>￥ '+item_info['price']+'</em></td>';
+                    html	+=	' </tr>';
+                    //alert(html);
+                    $("#cart_tr_title").after(html);
+				}
 				alert("已加入回购车");
 			}else if(obj[0]	==	2){
 				alert("数据传输有误");

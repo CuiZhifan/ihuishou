@@ -120,7 +120,7 @@ function selectcity(url){
               <div class="clear"></div>
             </div>
           </div>
-          <input type="button" value="立即下单" class="heat_input" onclick="new_addc_art('ajax/new_addcart.html','sub','00676fdb772fb0a63796fb07b4f134ef')" />
+          <input type="button" value="立即下单" class="heat_input" onclick="new_addcart('ajax/new_addcart.html','sub','00676fdb772fb0a63796fb07b4f134ef')" />
           <a href="javascript:;" class="heat_hg" v-bind:onclick="click1">加入回购车</a> </dd>
       </dl>
       <div class="heat_xin" style="margin-top:0">每成交一笔将为贫困地区的孩子捐赠1元 &nbsp;</div>
@@ -276,14 +276,14 @@ function selectcity(url){
       <div class="mui-mbar-cart">
         <div class="mui-list">
           <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-list">
-            <tbody><tr id="cart_tr_title">
+            <tbody>
+              <tr id="cart_tr_title">
               <th class="table-padding">机型</th>
               <th width="100">&nbsp;</th>
               <th width="68">评估价</th>
-              <div id="ADDCART">
+              </tr>
 
-              </div>
-            </tr>
+
             </tbody></table>
         </div>
         <!--结算-->

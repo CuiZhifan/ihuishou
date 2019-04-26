@@ -49,7 +49,7 @@ public class ReturnCart {
     }
 
     public void setImg(String img) {
-        this.img = img;
+        this.img = URL.picURL+img;
     }
 
     public String getName() {

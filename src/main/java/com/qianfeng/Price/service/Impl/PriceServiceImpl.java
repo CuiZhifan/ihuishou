@@ -1,8 +1,10 @@
 package com.qianfeng.Price.service.Impl;
 
+import com.qianfeng.Price.DTO.CartInfo;
 import com.qianfeng.Price.DTO.GetUserId;
 import com.qianfeng.Price.DTO.QueryChart;
 import com.qianfeng.Price.PO.GetId;
+import com.qianfeng.Price.VO.PriceCart;
 import com.qianfeng.Price.VO.PriceTypeInfo;
 import com.qianfeng.Price.VO.ReturnCart;
 import com.qianfeng.Price.mapper.IPriceMapper;
@@ -10,7 +12,12 @@ import com.qianfeng.Price.service.IPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PriceServiceImpl implements IPriceService {
@@ -51,6 +58,20 @@ public class PriceServiceImpl implements IPriceService {
     @Override
     public GetUserId getUserById(String orderId) {
         return mapper.getUserById(orderId);
+    }
+
+    @Override
+    public void addCart(PriceCart cart, HttpSession session) {
+        List list = (List) session.getAttribute(cart.getKey());
+        CartInfo cartInfo = new CartInfo();
+        cartInfo.setOrderId(UUID.randomUUID().toString().replace("-", "").substring(0,20));
+        cartInfo.setUserId((Integer) list.get(3));
+        cartInfo.setOrderPrice((Integer) list.get(1));
+        cartInfo.setOrderEstimates((String) list.get(2));
+        cartInfo.setOrderStatus(0);
+        cartInfo.setOrderCreateTime(new Timestamp(new Date().getTime()));
+        cartInfo.setOrderPhoneType((Integer) list.get(0));
+        mapper.addCart(cartInfo);
     }
 
 

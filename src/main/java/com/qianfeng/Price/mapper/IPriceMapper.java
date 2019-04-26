@@ -1,5 +1,6 @@
 package com.qianfeng.Price.mapper;
 
+import com.qianfeng.Price.DTO.CartInfo;
 import com.qianfeng.Price.DTO.GetUserId;
 import com.qianfeng.Price.DTO.QueryChart;
 import com.qianfeng.Price.DTO.TypeInfo;
@@ -20,7 +21,9 @@ public interface IPriceMapper {
 
     void removeCart(@Param("orderId") String orderId);
 
-    List<ReturnCart> queryCartInfo(@Param("userID") int userID);
+    List<ReturnCart> queryCartInfo(@Param("userId") int userId);
 
     GetUserId getUserById(@Param("orderId") String orderId);
+
+    void addCart(CartInfo cartInfo);
 }
