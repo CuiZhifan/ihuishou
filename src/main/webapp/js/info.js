@@ -5,12 +5,17 @@ function GetQueryString(name)
     if(r!=null)return  unescape(r[2]); return null;
 }
 var id = GetQueryString("typeId");
-var url = "http://localhost:8080/ihuishou/info/property/"+id;
+var url = "/ihuishou/info/property/"+id;
 var page1;
 var page2;
 var page3;
 var historymoney;
 var phone;
+var userID = window.localStorage.USERID;
+if(userID!=null){
+    $("#package_id").val(userID);
+}
+
 
 $.ajax({
     url:url,
@@ -31,7 +36,7 @@ $.ajax({
             parseTime: false
         });
 
-        $("#top-a").attr("href","http://localhost:8080/ihuishou/index/"+phone.brandId);
+        $("#top-a").attr("href","/ihuishou/index/"+phone.brandId);
         $("#top-a").text(phone.brandName);
         $("#top-span").text(phone.typeName);
         $("#gid").val(phone.typeId);

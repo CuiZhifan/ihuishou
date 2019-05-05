@@ -6,7 +6,7 @@ import com.qianfeng.Price.VO.PriceCart;
 import com.qianfeng.Price.VO.PriceTypeInfo;
 import com.qianfeng.Price.VO.ReturnCart;
 import com.qianfeng.Price.service.IPriceService;
-import com.qianfeng.commons.constant.URL;
+import com.qianfeng.commons.DTO.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/price")
@@ -34,15 +33,14 @@ public class PriceController {
     @RequestMapping("/getInfo/{key}")
     @ResponseBody
     public PriceTypeInfo toPrice(@PathVariable("key") String key, HttpSession session){
-        List list = (List) session.getAttribute(key);
-        int typeId = (int) list.get(0);
-        int money = (int) list.get(1);
-        String infos = (String) list.get(2);
+        Messages list = (Messages) session.getAttribute(key);
+        int typeId = list.getTypeId();
+        int money = list.getMoney();
+        String infos = list.getInfos();
         PriceTypeInfo info = service.queryTypeInfo(typeId);
         info.setDiscount(money);
         info.setInfos(infos);
         info.setKey(key);
-        System.out.println(info);
         return info;
     }
 
@@ -63,12 +61,12 @@ public class PriceController {
     public List addCart(PriceCart cart,HttpSession session){
         service.addCart(cart,session);
         //获取session中的信息
-        List attribute = (List) session.getAttribute(cart.getKey());
+        Messages attribute = (Messages) session.getAttribute(cart.getKey());
         //新建返回集合
         List result = new ArrayList();
         result.add("1");
             //查询购物车数量及总价
-        Integer userId = (Integer) attribute.get(3);
+        Integer userId = attribute.getUserId();
         QueryChart queryChart = service.queryCartNum(userId);
         result.add(queryChart);
         //新建第三个数据
@@ -86,7 +84,7 @@ public class PriceController {
 //        System.out.println(returnCart);
 //        result.add(returnCart);
         //新建第三个数据
-        List<ReturnCart> carts = service.queryCartInfo((Integer) attribute.get(3));
+        List<ReturnCart> carts = service.queryCartInfo(attribute.getUserId());
         result.add(carts);
         return result;
     }
@@ -94,8 +92,8 @@ public class PriceController {
     @ResponseBody
     @RequestMapping("/returnCarts")
     public List<ReturnCart> returnAllCart(String key,HttpSession session){
-        List attribute = (List) session.getAttribute(key);
-        List<ReturnCart> carts = service.queryCartInfo((Integer) attribute.get(3));
+        Messages attribute = (Messages) session.getAttribute(key);
+        List<ReturnCart> carts = service.queryCartInfo(attribute.getUserId());
         return carts;
     }
 }

@@ -205,7 +205,6 @@ function remove_cart(url,rowid){
 	});
 }
 
-
 function open_div(title,src,div_id){
 	div_id		=	arguments[2]?arguments[2]:'Loading';
 	

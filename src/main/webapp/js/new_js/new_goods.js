@@ -150,7 +150,8 @@ function new_show_price(url,act,func,elem_id,ifhuanxin){
 			var obj	=	eval(data);
 			if(obj[0]	==	1){
 				var key			=	obj[1];
-				var gourl		=	url.replace("http://localhost:8080/ihuishou/info/getDate","http://localhost:8080/ihuishou/price/"+key);
+                window.localStorage.KEY = key;
+				var gourl		=	url.replace("/ihuishou/info/getDate","/ihuishou/price/"+key);
 				location.href	=	gourl;
 				return;
 			}else{
@@ -225,16 +226,17 @@ function new_addcart(url,act,key){
 		//提交回购单操作
 		if(act	==	'sub'){
 			if(obj[0]	==	1){
-				gourl			=	url.replace("ajax/new_addcart","order/cart");;
+				gourl			=	url.replace("/ihuishou/Order/HelloOrder","/ihuishou/html/cart.html");
 				//location.href	=	gourl;
-				var check_url	=	url.replace("ajax/new_addcart","ajax/check_iflogin");
-				$.post(check_url,{},function(data){
+				var check_url	=	url.replace("/ihuishou/Order/HelloOrder","/ihuishou/user/checkUser");
+				$.post(check_url,{'key':key},function(data){
 					var obj	=	eval(data);
 					if(obj[0]	==	0){
-						login_pop(gourl);
+						alert("您还没有登录，或已失效，请重新登录！！");
+                        location.href	=	url.replace("/ihuishou/Order/HelloOrder","/ihuishou/login.html");
 						return;
 					}else{
-						gourl			=	url.replace("ajax/new_addcart","order/cart");;
+						gourl			=	url.replace("/ihuishou/Order/HelloOrder","/ihuishou/html/cart.html");;
 						location.href	=	gourl;
 						return;
 					}

@@ -131,15 +131,15 @@ function selectcity(url){
   </div>
 </div>
 <!--头部--><!--提交订单-->
-<div class="contanier page">
+<div class="contanier page" id="VUE">
   <div class="current"><a href="http://www.ihuigo.com/">首页</a><span>&gt;</span><em>订单提交成功</em></div>
   <!--提交订单-->
   <div class="process_main">
     <div class="sucess">
       <div class="sucess_t">
         <h2>恭喜，您的订单已提交成功！</h2>
-        <p>订单号：HG181107668210  您选择的交易方式为
-							<em>支付宝交易</em>，麦淘乐将对您的支付宝账号（18907181527）创建付款，付款后可在支付宝交易记录中查看本交易
+        <p>订单号：{{messages[0]}}  您选择的交易方式为
+							<em>{{messages[1]}}</em>，{{messages[2]}};
 						
 		</p>
       </div>
@@ -160,8 +160,8 @@ function selectcity(url){
 				
 		</div>
     <div class="liucheng_btn">
-		<a href="http://www.ihuigo.com/member.html" class="liucheng_gr">进入个人中心</a>
-		<a href="http://www.ihuigo.com/goods.html" class="liucheng_jx">继续回购</a>
+		<a href="/ihuishou/html/member.html" class="liucheng_gr">进入个人中心</a>
+		<a href="/ihuishou/html/index.html?brandId=0" class="liucheng_jx">继续回购</a>
 	</div>
     <div class="localization">
       <div class="title2_1"><img src="../images/icon06.png"></div>
@@ -373,5 +373,27 @@ function login_pop(){
 	DD_belatedPNG.fix('img,.banner ul, li, dl, dt, dd, span, em, div, i, samp, a, b, .kuang');
 </script>
 <![endif]-->
+<script src="../js/login.js"></script>
+<script src="../js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
 
+    var userID = window.localStorage.USERID;
+    var KEY = window.localStorage.KEY;
+
+    new Vue({
+        el:"#VUE",
+        data:{
+            messages:null
+        },
+        mounted(){
+            var url = "/ihuishou/Order/success/"+KEY;
+            axios.post(url)
+                .then(response => {
+                    this.messages = response.data;
+                })
+        }
+    });
+</script>
 </div></body></html>

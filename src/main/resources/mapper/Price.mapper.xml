@@ -17,7 +17,8 @@
     </select>
 
     <select id="queryCartNum" resultType="com.qianfeng.Price.DTO.QueryChart">
-        SELECT COUNT(*) as cart_total_items,SUM(order_price) as cart_total from tb_order where order_status = 0 and user_id = #{userId};
+        SELECT COUNT(*) as cart_total_items,SUM(order_price) as cart_total from tb_order
+        where order_status = 0 and user_id = #{userId};
     </select>
 
     <delete id="removeCart">
@@ -29,10 +30,11 @@
         <result property="name" column="type_name" javaType="java.lang.String"/>
         <result property="img" column="type_pic" javaType="java.lang.String"/>
         <result property="price" column="order_price" javaType="java.lang.Integer"/>
+        <result property="infos" column="order_estimates" javaType="java.lang.String"/>
     </resultMap>
 
     <select id="queryCartInfo" resultMap="CartInfoResultMap">
-        SELECT order_id,type_name,type_pic,order_price
+        SELECT order_id,type_name,type_pic,order_price,order_estimates
         from tb_order
         join tb_type on order_phone_type = type_id
         where order_status = 0 and user_id = #{userId};

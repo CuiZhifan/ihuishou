@@ -68,4 +68,6 @@
             join tb_brand ON tb_brand.brand_id = tb_type.brand_id
             where type_name like #{word}
     </select>
+
+
 </mapper>

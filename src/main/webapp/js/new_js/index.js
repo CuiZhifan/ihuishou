@@ -106,9 +106,9 @@ function	top_search_goods(){
 		//return false;
 	}
 	$.ajax({
-		url:"http://localhost:8080/ihuishou/index/type/setSession/"+val,
+		url:"/ihuishou/index/type/setSession/"+val,
         success:function (data) {
-            window.location.href="http://localhost:8080/ihuishou/html/index.html?brandId=0&name="+data;
+            window.location.href="/ihuishou/html/index.html?brandId=0&name="+data;
         }
 	});
 	// $("#top_goods_search").submit();

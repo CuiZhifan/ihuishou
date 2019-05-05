@@ -25,6 +25,7 @@
     </style>
 </head>
 <body>
+<input type="hidden" id="package_id" name="package_id" value="-1"/>
 <!--<link rel="stylesheet" type="text/css" href="../css/alert_zhe.css"/>-->
 <!--<script type="text/javascript" src="../js/alert_zhe.js"></script>-->
 <div id="mbDIV" style="display:none;"></div><!--头部-->
@@ -153,7 +154,7 @@
     <input type="hidden" id="view" value="goods_info"/>
     <input type="hidden" id="if_show_price" value="1"/>
     <input type="hidden" id="gid" name="gid" value="21025"/>
-    <input type="hidden" id="package_id" name="package_id" value="-1"/>
+
     <div id="ahs_property_head">
         <p>开始评估你的手机，只需3步，获得产品精准评估报价</p>
         <!--步骤一-->
@@ -263,7 +264,7 @@
             <div id="step3_nav" class="property_nav">
                 <div id="btn_step3_back" class="btn_back">< 返回上一步</div>
                 <div id="btn_step3_next" class="btn_next"
-                     onclick="new_show_price('http://localhost:8080/ihuishou/info/getDate','show_price')">查看价格 >
+                     onclick="new_show_price('/ihuishou/info/getDate','show_price')">查看价格 >
                 </div>
             </div>
         </div>
@@ -360,6 +361,7 @@
 <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
 <script src="../js/info.js"></script>
+<script src="../js/login.js"></script>
 <!--<script type="text/javascript">-->
     <!--function GetQueryString(name)-->
     <!--{-->
@@ -378,7 +380,7 @@
             <!--page3:null-->
         <!--},-->
         <!--mounted(){-->
-            <!--var url = "http://localhost:8080/ihuishou/info/property/"+id;-->
+            <!--var url = "/ihuishou/info/property/"+id;-->
             <!--setTimeout(() => {-->
 
             <!--}, 20);-->
@@ -394,5 +396,11 @@
         <!--}-->
     <!--});-->
 <!--</script>-->
+<script type="text/javascript">
+    var userID = window.localStorage.USERID;
+    if(userID==null){
+
+    }
+</script>
 </body>
 </html>

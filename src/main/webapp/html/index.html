@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>手机回收_麦淘乐</title>
@@ -13,7 +13,7 @@
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.ihuigo.com/ershoushouji.html">
     <link href="../favicon.ico" type=image/x-icon rel="Icon">
     <link href="../css/new_css/global.css" rel="stylesheet" type="text/css">
-    <script src="../js/new_js/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="../js/new_js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="../js/new_js/new_public.js" type="text/javascript"></script>
     <script type="text/javascript">
         function selectcity(url) {
@@ -56,7 +56,7 @@
         </div>
         <div class="shortcut-right">
             <ul id='login_show'>
-                <li><a href="members/login.html" rel="nofollow">登录</a></li>
+                <li><a id="loginoff" href="../login.html" rel="nofollow">登录</a></li>
                 <li><a href="members/register.html" rel="nofollow">注册</a></li>
                 
             </ul>
@@ -149,10 +149,14 @@
             <div class="brand">
                 <div class="title2"><span><a href="goods.html"><strong>手机</strong> 品牌</a></span></div>
                 <div class="brand_main">
-                    <div class="brand_hot" v-for="brand in brands">
+                    <div class="brand_hot" >
                         <!--<span id="" style="display: none">{{brand.brandId}}</span>-->
-                        <a :href="'http://localhost:8080/ihuishou/html/index.html?brandId='+brand.brandId">{{brand.brandName}}</a>
+                        <a href="/ihuishou/html/index.html?brandId=0">全部</a>
                         <em>|</em>
+                        <template v-for="brand in brands">
+                            <a :href="'/ihuishou/html/index.html?brandId='+brand.brandId">{{brand.brandName}}</a>
+                            <em>|</em>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -179,11 +183,12 @@
                 <div class="clear"></div>
                 <div class="pageStr">
                     <div class="ihuigo_page"><span class="cur_link">1</span><span><a
-                            href="ershoushouji/2.html">2</a></span><span><a
-                            href="ershoushouji/3.html">3</a></span><span><a
-                            href="ershoushouji/4.html">4</a></span><span><a
-                            href="ershoushouji/5.html">5</a></span><span><a href="ershoushouji/6.html">6</a></span><span
-                            class="next_link"><a href="ershoushouji/2.html">下一页</a></span><span class="last_link"><a
+                            v-bind:href="Hurl+'&page=2'">2</a></span><span><a
+                            v-bind:href="Hurl+'&page=3'">3</a></span><span><a
+                            v-bind:href="Hurl+'&page=4'">4</a></span><span><a
+                            v-bind:href="Hurl+'&page=5'">5</a></span><span><a
+                            v-bind:href="Hurl+'&page=6'">6</a></span><span
+                            class="next_link"><a v-bind:href="Hurl+'&page='+next">下一页</a></span><span class="last_link"><a
                             href="ershoushouji/232.html">尾页</a></span></div>
                 </div>
             </div>
@@ -327,10 +332,14 @@
 <![endif]-->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
-
+<script src="../js/login.js"></script>
 <script type="text/javascript">
+    var key = window.localStorage.KEY;
+    if(key!=null){
+        $("#loginoff").text("登出");
+        $("#loginoff").attr("href","index.html?brandId=0");
+        $("#loginoff").attr("onClick","loginOff()");
+    }
 
     function GetQueryString(name)
     {
@@ -340,15 +349,25 @@
     }
     var id = GetQueryString("brandId");
     var name = GetQueryString("name");
+    var page = GetQueryString("page");
+    var next = 0;
+    if(page!=null||page<1){
+        next = 2;
+    }else {
+        next = Number(page)+Number(1);
+    }
     new Vue({
         el:"#allBrand",
         data:{
             brands:null,
             types:null,
-            length:null
+            length:null,
+            next:next,
+            url:"/ihuishou/index/type/"+id+'-'+name,
+            Hurl:"/ihuishou/html/index.html?brandId="+id+"&name="+name
         },
         mounted(){
-            var url = "http://localhost:8080/ihuishou/index/type/"+id+"-"+name;
+            url = this.url+"-"+page;
             axios.post(url)
                 .then(response => {
                     this.types = response.data[1];

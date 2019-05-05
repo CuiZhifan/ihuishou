@@ -66,7 +66,7 @@ public class InfoServiceImpl implements IInfoService {
 //        读取参数
         int typeId = date.getGid();
         String infos = (date.getProperty_ids()+","+date.getDesc_ids()+","+date.getPj_ids()).replace(",,",",");
-        infos = infos.replace(",0,",",");
+        infos = infos.replace(",0","");
         //        获取总折扣
         String[] ids = infos.split(",");
         List<GetMoney> monies = mapper.getMoney(typeId, ids);

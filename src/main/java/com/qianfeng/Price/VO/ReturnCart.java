@@ -8,7 +8,9 @@ public class ReturnCart {
     private String img;
     private String name;
     private String base_url;
+    private String infos;
     private int price;
+
 
     @Override
     public String toString() {
@@ -19,6 +21,7 @@ public class ReturnCart {
                 ", name='" + name + '\'' +
                 ", price='" + price + '\'' +
                 ", base_url='" + base_url + '\'' +
+                ", infos='" + infos + '\'' +
                 '}';
     }
 
@@ -38,6 +41,14 @@ public class ReturnCart {
         this.rowid = rowid;
         this.remove_url = URL.removeOrderURL+rowid;
         this.base_url = URL.baseURL;
+    }
+
+    public String getInfos() {
+        return infos;
+    }
+
+    public void setInfos(String infos) {
+        this.infos = infos;
     }
 
     public String getRemove_url() {

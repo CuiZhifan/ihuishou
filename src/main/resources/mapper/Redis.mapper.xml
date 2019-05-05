@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.redis.Mapper.RedisMapper">
+    <resultMap id="brandResultMap" type="com.qianfeng.index.VO.IndexBrand">
+        <id property="brandId" column="brandId" javaType="java.lang.Integer"/>
+        <result property="brandName" column="brandName" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="typeResultMap" type="com.qianfeng.index.VO.IndexType">
+        <id property="typeId" column="typeId" javaType="java.lang.Integer"/>
+        <result property="typeName" column="typeName" javaType="java.lang.String"/>
+        <result property="typePic" column="typePic" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="brand_typeResultMap" type="com.qianfeng.index.VO.IndexBrand">
+        <id property="brandId" column="brandId" javaType="java.lang.Integer"/>
+        <result property="brandName" column="brandName" javaType="java.lang.String"/>
+        <collection property="typeList" ofType="com.qianfeng.index.VO.IndexType">
+            <id property="typeId" column="typeId" javaType="java.lang.Integer"/>
+            <result property="typeName" column="typeName" javaType="java.lang.String"/>
+            <result property="totleMoney" column="totleMoney" javaType="java.lang.Integer"/>
+            <result property="typePic" column="typePic" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <select id="indexQueryType" resultMap="typeResultMap">
+        select type_id as typeId,type_name as typeName,type_pic as typePic from tb_type
+        <if test="brandId > 0">
+            <where>brand_id = #{brandId}</where>
+        </if>
+        limit #{start},#{size};
+    </select>
+
+    <select id="indexQueryBrand" resultMap="brandResultMap">
+        select brand_id as brandId,brand_name as brandName from tb_brand;
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(type_id) from tb_type
+        <if test="brandId > 0">
+            <where>brand_id = #{brandId}</where>
+        </if>
+    </select>
+
+</mapper>

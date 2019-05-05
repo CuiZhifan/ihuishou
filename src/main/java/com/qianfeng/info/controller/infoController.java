@@ -1,5 +1,6 @@
 package com.qianfeng.info.controller;
 
+import com.qianfeng.commons.DTO.Messages;
 import com.qianfeng.index.VO.GetDate;
 import com.qianfeng.info.VO.HistoryMoney;
 import com.qianfeng.info.VO.TypeInfo;
@@ -42,17 +43,17 @@ public class infoController {
         String infos = (String) result.get(1);
 //        System.out.println("评估后价格"+money);
         List list = new ArrayList();
-        List info = new ArrayList();
-        info.add(date.getGid());
-        info.add(money);
-        info.add(infos);
+        Messages messages = new Messages();
+        messages.setTypeId(date.getGid());
+        messages.setMoney(money);
+        messages.setInfos(infos);
         if(date.getPackage_id()<0){
-            info.add(service.addTemporaryWorker());
+            messages.setUserId(service.addTemporaryWorker());
         }else {
-            info.add(date.getPackage_id());
+            messages.setUserId(date.getPackage_id());
         }
         String key = UUID.randomUUID().toString().replace("-","").substring(0,10);
-        session.setAttribute(key,info);
+        session.setAttribute(key,messages);
         list.add("1");
         list.add(key);
         return list;

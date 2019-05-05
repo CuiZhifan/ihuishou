@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>会员中心-麦淘乐 -  手机回收网 | 二手手机交易 | 笔记本回收 | 平板回收</title>
@@ -31,6 +31,77 @@ function selectcity(url){
 <script src="../js/new_js/index.js" type="text/javascript"></script>
 </head>
 <body>
+<div id="mbDIV" style="display:none;"></div><!--头部-->
+<div class="shortcut">
+    <div class="page">
+        <div class="shortcut-left">
+            <ul>
+                <li class="item-more"><a rel="nofollow" href="javascript:void(0)"><span>&nbsp;</span><em>手机逛回购</em></a>
+                    <div class="sub-nav">
+                        <div><a href="" rel="nofollow" target="_blank"><img src="" width="145" height="145"></a></div>
+                        <div>扫描进入手机站</div>
+                    </div>
+                </li>
+                <li class="city"><span>当前：
+        <span id="selectcity_new">
+          武汉
+        </span>
+        <a rel="nofollow" href="javascript:void(0);" onclick="selectcity('/index/selectcity_new.html');">[切换城市]</a></span></li>
+            </ul>
+        </div>
+        <div class="shortcut-right">
+            <ul id="login_show">
+                <li><a href="http://www.qfedu.com/member.html" rel="nofollow" title="1756229479@qq.com">1756229479@qq.com</a></li>
+                <li class="my-cart"><a href="http://www.qfedu.com/member.html" rel="nofollow"><em>我的回购</em></a>
+                    <div class="sub-cart">
+                        <a href="http://www.qfedu.com/member/order.html" rel="nofollow">我的订单</a>
+                        <a href="http://www.qfedu.com/member.html" rel="nofollow">帐户中心</a>
+                        <a href="http://www.qfedu.com/member/juan.html" rel="nofollow">环保券<i>0</i>张</a>
+                        <a href="http://www.qfedu.com/member/logout.html" rel="nofollow">退出</a> </div>
+                </li>
+                <li class="item-daohang"><a class="item-daohang-nav" href="http://www.qfedu.com/service/map.html" rel="nofollow" title="麦淘乐手机回收网站导航">网站导航</a>
+                    <div class="sub-nav2">
+                        <ul>
+                            <li>
+                                <dl>
+                                    <dt>主要频道</dt>
+                                    <dd><a target="_blank" href="http://www.qfedu.com/goods.html" title="闲置二手手机回收价格评估">旧机回收</a></dd>
+                                    <dd><a target="_blank" href="http://www.qfedu.com/youpin.html" title="靓机优选手机抢购">靓机优选</a></dd>
+                                    <dd><a target="_blank" href="http://www.qfedu.com/huanxin.html" title="二手手机以旧换新活动">旧机换新</a></dd>
+                                </dl>
+                            </li>
+                            <!--               <li>-->
+                            <!--               <dl>-->
+                            <!--                   <dt>企业服务</dt>-->
+                            <!--                   <dd><a href="--><!--" rel="nofollow" target="_blank" title="手机回收企业代理合作">企业代理</a></dd>-->
+                            <!--                   <dd><a href="--><!--" rel="nofollow" target="_blank" title="手机回收市场校园代理合作">校园代理</a></dd>-->
+                            <!--                 </dl>-->
+                            <!--               </li>-->
+                            <!--               <li>-->
+                            <dl>
+                                <dt>客户服务</dt>
+                                <dd><a href="http://www.qfedu.com/service/terms.html" rel="nofollow" target="_blank" title="麦淘乐手机回收服务条款">服务条款</a></dd>
+                                <dd><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank" title="手机回收问题投诉与建议">投诉建议</a></dd>
+                                <!--  <dd><a onClick="zixunserver('/index/zixunserver.html');" href="javascript:void(0)" rel="nofollow" target="_blank">在线客服</a></dd>-->
+                            </dl>
+
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="header">
+    <div class="page">
+        <h1 class="logo"><a href=""><img src="../images/new_images/logo.png" width="171" height="43"
+                                         title="二手手机回收交易网"/></a></h1>
+
+    </div>
+</div>
+<!--头部-->
 <link rel="stylesheet" type="text/css" href="../css/alert_zhe.css" />
 <script type="text/javascript" src="../js/alert_zhe.js"></script>
 <!--查询结果-->
@@ -56,16 +127,16 @@ function selectcity(url){
 </dl>
 </div>
 <!--会员中心列表-->
-      <div class="member_r">
+      <div class="member_r" id="VUE">
         <!--我的账户-->
         <div class="account_main">
           <div class="account">
             <div class="account_title"><span>我的帐户</span></div>
               <!--可用资金-->
             <div class="funds">
-              <div class="funds_l">可用金额<span>0.00</span>元<em></em></div>
+              <div class="funds_l">可用金额<span>{{user.userBalance}}</span>元<em></em></div>
               <ul class="funds_r">
-                <li class="funds_color1"><a target="_blank" href="personal/withdrawal.html">提现</a></li>
+                <li class="funds_color1"><a target="_self" v-bind:href="url" >提现</a></li>
                 <li class="funds_color2"><a target="_blank" href="personal/top_up.html">充值</a></li>
               </ul>
               <div class="clear"></div>
@@ -73,7 +144,7 @@ function selectcity(url){
             <!--可用资金-->
             <!--资金-->
             <div class="funds" >
-              <div class="funds_l">冻结金额<span>0.00</span>元<em>( 官方回购临时冻结金额 )</em></div>
+              <div class="funds_l">冻结金额<span>{{user.userFrozen}}</span>元<em>( 官方回购临时冻结金额 )</em></div>
               <ul class="funds_r">
 
               </ul>
@@ -82,7 +153,7 @@ function selectcity(url){
             <!--资金-->
               <!--资金-->
             <div class="funds">
-              <div class="funds_l">冻结金额<span>0.00</span>元<em>（二手优品，以旧换新，提现）</em></div>
+              <div class="funds_l">冻结金额<span>{{user.userFrozenOtn}}</span>元<em>（二手优品，以旧换新，提现）</em></div>
               <ul class="funds_r">
                 <li class="funds_color1">
                 <a target="_blank" href="personal/top_up/history.html">交易记录</a>
@@ -134,7 +205,7 @@ function selectcity(url){
             <li class="item1">
               <div class="account_status_det">
                 <h4 class="tit">邮箱验证</h4>
-                <p><span>1115440210@qq.com</span></p>
+                <p><span>{{user.userEmail}}</span></p>
                 <p class="descript">
                                 <i class="descript_icon2"></i><span>未验证</span><a href="javascript:funcvaliemail('/member/valiemail.html')">申请验证</a>
                                 </p>
@@ -143,7 +214,7 @@ function selectcity(url){
             <li class="item2">
               <div class="account_status_det" id="mobile_vali_status">
                 <h4 class="tit">手机绑定</h4>
-                <p><span>13716530181</span><a href="javascript:funcmodmobile('/member/modmobile.html')" >修改</a></p>
+                <p><span>{{user.userEmail}}</span><a href="javascript:funcmodmobile('/member/modmobile.html')" >修改</a></p>
                 <p class="descript">
 										<i class="descript_icon2"></i><span>未绑定</span>
 					<a href="javascript:funcvalimobile('/member/valimobile.html')">申请绑定</a>
@@ -167,7 +238,7 @@ function selectcity(url){
           <!--邮箱、手机验证-->
           <!--回收时间-->
           <div class="time_l">
-            <p><span><i>￥</i>0.00</span></p>
+            <p><span><i>￥</i>{{user.userIncome}}</span></p>
             <p>回收旧机收入</p>
           </div>
           <div class="time_c"><span>累计</span></div>
@@ -185,9 +256,12 @@ function selectcity(url){
             <div class="info_pers_img"><img src="../images/tx.png" /></div>
             <div class="info_pers_txt">
               <div class="info_pers_title">
-                <p><em>下午好！</em><span><a title="1115440210@qq.com">1115440210@qq.com</a></span></p>
+                <p><em>下午好！</em><span><a v-bind:title="user.userEmail">{{user.userEmail}}</a></span></p>
               </div>
-              <div class="star"><span><img src="../images/star1.png" /></span><span><img src="../images/star1.png" /></span><span><img src="../images/star2.png" /></span><span><img src="../images/star2.png" /></span><span><img src="../images/star2.png" /></span></div>
+              <div class="star">
+                  <span v-for="n in user.userLevel"><img src="../images/star1.png" /></span>
+                  <span v-for="n in 5-user.userLevel"><img src="../images/star2.png" /></span>
+              </div>
               <p>回购卫士</p>
             </div>
             <div class="clear"></div>
@@ -199,6 +273,66 @@ function selectcity(url){
     </div>
     <!--会员中心-->
   </div>
+</div>
+<div class="footer">
+
+    <!--购物车-->
+    <div class="mui-mbar">
+        <!--黑色栏-->
+        <div class="mui-mbar-mask">
+            <div class="mui-mbar-gwc">
+                <div class="mui-mbar-wz"><em class="cart_total_items">0</em>
+                    <p><img src="../images/cart.png"></p>
+                    <span>回购车</span>
+                </div>
+            </div>
+            <!--在线客服-->
+            <div class="mui-mbar-kefu mui-mbar-all">
+                <div class="mui-mbar-go"><a rel="nofollow" href="javascript:void(0)" onclick="zixunserver('/index/zixunserver.html')"><img src="../images/cart_icon1.png"></a></div>
+                <div class="mui-zaixian mui-mbar-last"><a href="javascript:void(0)" onclick="zixunserver('/index/zixunserver.html')">在线客服</a></div>
+            </div>
+            <!--在线客服-->
+            <!--微信二维码-->
+            <div class="mui-mbar-weixin">
+                <div class="mui-mbar-go"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/cart_icon2.png"></a></div>
+                <div class="mui-weima"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/weixin.png" width="192" height="192"></a></div>
+            </div>
+            <!--微信二维码-->
+            <!--投诉建议-->
+            <div class="mui-mbar-tousu mui-mbar-all">
+                <div class="mui-mbar-go"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/cart_icon3.png"></a></div>
+                <div class="mui-jianyi mui-mbar-last"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank">投诉建议</a></div>
+            </div>
+            <!--投诉建议-->
+            <!--返回顶部-->
+            <div class="mui-mbar-top mui-mbar-all">
+                <div class="mui-mbar-go"><a rel="nofollow" href="javascript:goTop();" class="sidetop"><img src="../images/go_top.png"></a></div>
+                <div class="mui-fanhui mui-mbar-last">返回顶部</div>
+            </div>
+            <!--返回顶部-->
+        </div>
+        <!--黑色栏-->
+        <!--购物车-->
+        <div class="mui-mbar-cart">
+            <div class="mui-list">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-list">
+                    <tbody><tr id="cart_tr_title">
+                        <th class="table-padding">机型</th>
+                        <th width="100">&nbsp;</th>
+                        <th width="68">评估价</th>
+                    </tr>
+                    </tbody></table>
+            </div>
+            <!--结算-->
+            <div class="mui-jiesuan">
+                <p>已选<em class="cart_total_items">0</em>台共计<em id="cart_total">￥0</em></p>
+                <input type="button" value="去结算" class="mui-button" onclick="gocart('/ajax/check_iflogin.html','/order/cart.html')">
+            </div>
+            <!--结算-->
+        </div>
+        <!--购物车-->
+    </div>
+    <!--购物车-->
 </div>
 <!--查询结果-->
 <link rel="stylesheet" type="text/css" href="../css/alert_zhe.css" />
@@ -217,7 +351,9 @@ function selectcity(url){
           </div>
         </div>
 	</div>
+<script src="../js/login.js"></script>
 <script>
+
 function	funcbank(url,func){
 	if(func	==	'mod'){
 		open_div_extends('修改银行卡',url,'Loading_child');
@@ -251,3 +387,34 @@ function funcmodmobile(url){
 	open_div_extends('修改手机',url,'Loading_child');
 }
 </script>
+<script src="../js/login.js"></script>
+<script src="../js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+    var userID = window.localStorage.USERID;
+    var KEY = window.localStorage.KEY;
+
+    new Vue({
+        el:"#VUE",
+        data:{
+            user:null,
+            url:null
+        },
+        mounted(){
+            var url = "/ihuishou/user/userInfo/"+userID;
+            axios.post(url)
+                .then(response => {
+                    this.user = response.data;
+                    this.user.userBalance = this.user.userBalance/100;
+                    this.user.userFrozen = this.user.userFrozen/100;
+                    this.user.userFrozenOtn = this.user.userFrozenOtn/100;
+                    this.user.userIncome = this.user.userIncome/100;
+                    this.url = "/ihuishou/user/CashOut/"+this.user.userId;
+                })
+        }
+    });
+</script>
+</body>
+</html>

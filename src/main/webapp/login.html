@@ -95,17 +95,19 @@
                     remeberMe:$("#remeberMe").val(),
                     settle:settle
                 },function(data){
-                    alert(data);
-                    if(data=="failed"){
+                    var obj	=	eval(data);
+                    if(obj[0]=="failed"){
                         alert("用户名或者密码错误");
-                    }else if(data == "unknown") {
+                    }else if(obj[0] == "unknown") {
                         alert("用户不存在")
-                    } else if(data == "mistake") {
+                    } else if(obj[0] == "mistake") {
                         alert("密码错误")
-                    }  else if(data == "settle"){
-                        window.location.href="/ihuishou/good/order";
+                    }  else if(obj[0] == "settle"){
+                        window.location.href="/ihuishou/html/order.html";
                     } else {
-                        window.location.href="/ihuishou/good/home";
+                        window.localStorage.KEY = obj[1];
+                        window.localStorage.USERID = obj[2];
+                        window.location.href="/ihuishou/html/index.html?brandId=0";
                     }
                 });
     }

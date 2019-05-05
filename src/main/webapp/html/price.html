@@ -25,8 +25,8 @@ function selectcity(url){
 <script src="../js/new_js/new_goods.js" type="text/javascript"></script>
 </head>
 <body>
-<!--<link rel="stylesheet" type="text/css" href="../css/alert_zhe.css" />-->
-<!--<script type="text/javascript" src="../js/alert_zhe.js"></script>-->
+<link rel="stylesheet" type="text/css" href="../css/alert_zhe.css" />
+<script type="text/javascript" src="../js/alert_zhe.js"></script>
 <div id="mbDIV" style="display:none;"></div><!--头部-->
 <div class="shortcut">
   <div class="page">
@@ -120,7 +120,7 @@ function selectcity(url){
               <div class="clear"></div>
             </div>
           </div>
-          <input type="button" value="立即下单" class="heat_input" onclick="new_addcart('ajax/new_addcart.html','sub','00676fdb772fb0a63796fb07b4f134ef')" />
+          <input type="button" value="立即下单" class="heat_input" v-bind:onclick="click2" />
           <a href="javascript:;" class="heat_hg" v-bind:onclick="click1">加入回购车</a> </dd>
       </dl>
       <div class="heat_xin" style="margin-top:0">每成交一笔将为贫困地区的孩子捐赠1元 &nbsp;</div>
@@ -384,6 +384,7 @@ function goshuangdan(check_url,gourl){
 	})
 }
 </script>
+<script src="../js/login.js"></script>
 <script>
 $(function(){
     _nav('nav_s',2,3);
@@ -405,20 +406,29 @@ $(function(){
         data:{
             type:null,
             reUrl:null,
-            click1:null
+            click1:null,
+            click2:null
         },
         mounted(){
-            var url = "http://localhost:8080/ihuishou/price/getInfo/"+key;
+            var url = "/ihuishou/price/getInfo/"+key;
             axios.post(url)
                 .then(response => {
                     this.type = response.data;
-                    this.reUrl = "http://localhost:8080/ihuishou/html/info.html?typeId="+response.data.typeId;
-                    this.click1 = "new_addcart('http://localhost:8080/ihuishou/price/addCart','add','"+this.type.key+"')";
+                    this.reUrl = "/ihuishou/html/info.html?typeId="+response.data.typeId;
+                    this.click1 = "new_addcart('/ihuishou/price/addCart','add','"+this.type.key+"')";
+                    this.click2 = "new_addcart('/ihuishou/Order/HelloOrder','sub','"+this.type.key+"')";
                 })
         }
     })
 </script>
 <script type="text/javascript">
+</script>
+<script type="text/javascript">
+    function login_pop(){
+        var gourl 	=	arguments[0] ? arguments[0] : '';
+        if(gourl	!= '')	$("#public_gourl").val(gourl);
+        open_div_extends('登录与注册','/members/login_popup.html','Loading_child_members','502','600');
+    }
 </script>
 </body>
 </html>

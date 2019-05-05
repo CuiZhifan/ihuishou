@@ -9,6 +9,7 @@ import com.qianfeng.Price.VO.PriceTypeInfo;
 import com.qianfeng.Price.VO.ReturnCart;
 import com.qianfeng.Price.mapper.IPriceMapper;
 import com.qianfeng.Price.service.IPriceService;
+import com.qianfeng.commons.DTO.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,15 +63,15 @@ public class PriceServiceImpl implements IPriceService {
 
     @Override
     public void addCart(PriceCart cart, HttpSession session) {
-        List list = (List) session.getAttribute(cart.getKey());
+        Messages list = (Messages) session.getAttribute(cart.getKey());
         CartInfo cartInfo = new CartInfo();
         cartInfo.setOrderId(UUID.randomUUID().toString().replace("-", "").substring(0,20));
-        cartInfo.setUserId((Integer) list.get(3));
-        cartInfo.setOrderPrice((Integer) list.get(1));
-        cartInfo.setOrderEstimates((String) list.get(2));
+        cartInfo.setUserId(list.getUserId());
+        cartInfo.setOrderPrice(list.getMoney());
+        cartInfo.setOrderEstimates(list.getInfos());
         cartInfo.setOrderStatus(0);
         cartInfo.setOrderCreateTime(new Timestamp(new Date().getTime()));
-        cartInfo.setOrderPhoneType((Integer) list.get(0));
+        cartInfo.setOrderPhoneType(list.getTypeId());
         mapper.addCart(cartInfo);
     }
 

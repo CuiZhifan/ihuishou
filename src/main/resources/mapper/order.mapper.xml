@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.order.mapper.IOrderMapper">
+    <resultMap id="addBaodanResultMapper" type="com.qianfeng.order.PO.TbChit">
+        <id property="userId" column="user_id" javaType="java.lang.Integer"/>
+        <result property="baoxian_name" column="chit_name" javaType="java.lang.String"/>
+        <result property="baoxian_card_id" column="chit_account" javaType="java.lang.String"/>
+    </resultMap>
+
+    <insert id="addBaodan">
+        insert into tb_chit(user_id, chit_name, chit_account) values
+        (#{userId},#{baoxian_name},#{baoxian_card_id});
+    </insert>
+
+    <resultMap id="orderIdList" type="com.qianfeng.order.DTO.OrderIdList">
+        <id property="orderId" column="order_id" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="checkOrderIdList" resultMap="orderIdList">
+        select  order_id from tb_order where user_id = #{userId} and order_status = 0;
+    </select>
+
+    <update id="updateOrder">
+        update tb_order
+        set
+        order_id = #{orderId}
+        <if test="userId!=null">,user_id = #{userId}</if>
+        <if test="orderPrice!=null">,order_price = #{orderPrice}</if>
+        <if test="orderUserName!=null">,order_user_name = #{orderUserName}</if>
+        <if test="orderUserTel!=null">,order_user_tel = #{orderUserTel}</if>
+        <if test="orderAd!=null">,order_ad = #{orderAd}</if>
+        <if test="orderAdInfo!=null">,order_ad_info = #{orderAdInfo}</if>
+        <if test="orderModel!=null">,order_model = #{orderModel}</if>
+        <if test="orderInfo!=null">,order_info = #{orderInfo}</if>
+        <if test="takeTime1!=null">,take_time1 = #{takeTime1}</if>
+        <if test="takeTime2!=null">,take_time2 = #{takeTime2}</if>
+        <if test="orderEstimates!=null">,order_estimates = #{orderEstimates}</if>
+        <if test="postCompany!=null">,post_company = #{postCompany}</if>
+        <if test="postCode!=null">,post_code = #{postCode}</if>
+        <if test="orderStatus!=null">,order_status = #{orderStatus}</if>
+        <if test="orderCreateTime!=null">,order_create_time = #{orderCreateTime}</if>
+        <if test="orderPhoneType!=null">,order_phone_type = #{orderPhoneType}</if>
+        <if test="orderInfo1!=null">,order_info1 = #{orderInfo1}</if>
+        <if test="orderInfo2!=null">,order_info2 = #{orderInfo2}</if>
+        <if test="orderInfo3!=null">,order_info3 = #{orderInfo3}</if>
+         where order_id = #{orderId}
+    </update>
+
+    <resultMap id="queryOrder" type="com.qianfeng.order.PO.TbOrder">
+        <id property="orderId" column="order_id" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.Long"/>
+        <result property="orderPrice" column="order_price" javaType="java.lang.Long"/>
+        <result property="orderUserName" column="order_user_name" javaType="java.lang.String"/>
+        <result property="orderUserTel" column="order_user_tel" javaType="java.lang.String"/>
+        <result property="orderAd" column="order_ad" javaType="java.lang.String"/>
+        <result property="orderAdInfo" column="order_adInfo" javaType="java.lang.String"/>
+        <result property="orderModel" column="order_model" javaType="java.lang.String"/>
+        <result property="orderInfo" column="order_info" javaType="java.lang.String"/>
+        <result property="takeTime1" column="take_time1" javaType="java.lang.String"/>
+        <result property="takeTime2" column="take_time2" javaType="java.lang.String"/>
+        <result property="orderEstimates" column="order_estimates" javaType="java.lang.String"/>
+        <result property="postCompany" column="post_company" javaType="java.lang.String"/>
+        <result property="postCode" column="post_code" javaType="java.lang.String"/>
+        <result property="orderStatus" column="order_status" javaType="java.lang.Long"/>
+        <result property="orderCreateTime" column="order_create_time" javaType="java.sql.Timestamp"/>
+        <result property="orderPhoneType" column="order_phone_type" javaType="java.lang.Long"/>
+        <result property="orderInfo1" column="order_info1" javaType="java.lang.String"/>
+        <result property="orderInfo2" column="order_info2" javaType="java.lang.String"/>
+        <result property="orderInfo3" column="order_info3" javaType="java.lang.String"/>
+
+    </resultMap>
+
+    <select id="queryOrder" resultMap="queryOrder">
+        select * from tb_order where order_id = #{orderId};
+    </select>
+
+    <update id="updateFrozen">
+        update tb_user set user_frozen = user_frozen + #{money} where user_id = #{userId};
+    </update>
+</mapper>

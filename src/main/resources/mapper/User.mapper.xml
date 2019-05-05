@@ -4,4 +4,56 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qianfeng.User.Mapper.IUserMapper">
 
+    <resultMap id="checkLoginResultMap" type="com.qianfeng.User.DTO.CheckUser">
+        <id property="userId" column="user_id" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <select id="checkLogin" resultMap="checkLoginResultMap">
+        select user_id from tb_user where user_id = #{userId} and user_level > 0
+    </select>
+
+    <resultMap id="loginResultMap" type="com.qianfeng.User.DTO.LoginResult">
+        <id property="userId" column="user_id" javaType="java.lang.Integer"/>
+        <result property="userName" column="user_name" javaType="java.lang.String"/>
+    </resultMap>
+    
+    <select id="login" resultMap="loginResultMap">
+        select user_id,user_name from tb_user
+        where user_email = #{username} or user_phone = #{username}
+        <if test="password!=null">
+            and user_pwd = #{password}
+        </if>
+    </select>
+
+    <resultMap id="queryUserById" type="com.qianfeng.User.PO.TbUser">
+        <id property="userId" column="user_id" javaType="java.lang.Long"/>
+        <result property="userName" column="user_name" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userBalance" column="user_balance" javaType="java.lang.Long"/>
+        <result property="userFrozen" column="user_frozen" javaType="java.lang.Long"/>
+        <result property="userFrozenOtn" column="user_frozen_otn" javaType="java.lang.Long"/>
+        <result property="userEmail" column="user_email" javaType="java.lang.String"/>
+        <result property="joinTime" column="join_time" javaType="java.sql.Timestamp"/>
+        <result property="userLevel" column="user_level" javaType="java.lang.Long"/>
+        <result property="userIncome" column="user_income" javaType="java.lang.Long"/>
+        <result property="userPhone" column="user_phone" javaType="java.lang.String"/>
+        <result property="userInfo1" column="user_info1" javaType="java.lang.String"/>
+        <result property="userInfo2" column="user_info2" javaType="java.lang.String"/>
+        <result property="userInfo3" column="user_info3" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="queryUser" resultMap="queryUserById">
+        select * from tb_user where user_id = #{userId};
+    </select>
+    
+    <update id="CashOut">
+        update tb_user set
+        user_income = user_income + user_frozen_otn + user_frozen,
+        user_balance = user_balance + user_frozen + user_frozen_otn,
+        user_frozen = 0,
+        user_frozen_otn = 0
+        where user_id = #{userId};
+    </update>
+
+
 </mapper>
