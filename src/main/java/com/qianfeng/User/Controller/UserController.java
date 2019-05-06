@@ -4,6 +4,7 @@ import com.qianfeng.User.DTO.LoginResult;
 import com.qianfeng.User.DTO.UserLoginInfo;
 import com.qianfeng.User.PO.TbUser;
 import com.qianfeng.User.Service.IUserService;
+import com.qianfeng.User.VO.RegistVO;
 import com.qianfeng.commons.DTO.Messages;
 import com.qianfeng.commons.constant.URL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,8 +56,8 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public List userLogin(UserLoginInfo info,HttpSession session){
-        LoginResult login = service.login(info.getUserName(), info.getUserPassword());
+    public List userLogin(UserLoginInfo info,String key,HttpSession session){
+        LoginResult login = service.login(info.getUserName(), info.getUserPassword(),key,session);
         if("null".equals(info.getSettle())&&login.getMsg()==null){
             login.setMsg("null");
         }else if(login.getMsg()==null){
@@ -62,7 +65,9 @@ public class UserController {
         }
         Messages messages = new Messages();
         messages.setUserId(login.getUserId());
-        String key =  UUID.randomUUID().toString().replace("-","").substring(0,10);
+        if (key==null){
+            key =  UUID.randomUUID().toString().replace("-","").substring(0,10);
+        }
         session.setAttribute(key,messages);
         List a = new ArrayList();
         a.add(login.getMsg());
@@ -79,8 +84,16 @@ public class UserController {
     }
 
     @RequestMapping("/CashOut/{userId}")
-    public String CashOutMoney(@PathVariable("userId") int userId){
+    public String CashOutMoney(@PathVariable("userId") int userId, HttpServletRequest request){
         service.CashOut(userId);
-        return "redirect:"+ URL.baseURL+"html/member.html";
+        return "redirect:"+ URL.getBaseURL(request)+"html/member.html";
+    }
+
+    @RequestMapping("/regist")
+    @ResponseBody
+    public List Register(RegistVO registVO,HttpSession session){
+        String result = service.Register(registVO.getUsername(), registVO.getPassword(), registVO.getKey(), session);
+        List list = Arrays.asList(result.split("-"));
+        return list;
     }
 }

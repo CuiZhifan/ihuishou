@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class OrderController {
     }
 
     @RequestMapping("/getOrder")
-    public String getOrder(ReceiveOrder receiveOrder, String validate_code, HttpSession session){
+    public String getOrder(ReceiveOrder receiveOrder, String validate_code, HttpSession session,HttpServletRequest request){
         //获取ID
         int userId = receiveOrder.getUserId();
         //修改冻结金额
@@ -77,7 +78,7 @@ public class OrderController {
         Messages msg = (Messages) session.getAttribute(validate_code);
         msg.setOrderList(orderIdLists);
         session.setAttribute(validate_code,msg);
-        return "redirect:"+ URL.baseURL+"html/order-success.html";
+        return "redirect:"+ URL.getBaseURL(request)+"html/order-success.html";
     }
 
     @RequestMapping("/success/{key}")

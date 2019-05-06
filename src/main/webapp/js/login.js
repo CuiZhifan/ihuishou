@@ -34,7 +34,7 @@ if(userID!=null){
     })
 }else {
     var html = "<li><a id=\"loginoff\" href=\"../login.html\" rel=\"nofollow\">登录</a></li>\n" +
-        "       <li><a href=\"members/register.html\" rel=\"nofollow\">注册</a></li>";
+        "       <li><a href=\"/ihuishou/register.html\" rel=\"nofollow\">注册</a></li>";
     $("#login_show").html(html);
 }
 var KEY = window.localStorage.KEY;

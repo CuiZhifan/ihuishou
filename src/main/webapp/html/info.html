@@ -48,13 +48,13 @@
         </div>
         <div class="shortcut-right">
             <ul id="login_show">
-                <li><a href="http://www.qfedu.com/member.html" rel="nofollow" title="1756229479@qq.com">1756229479@qq.com</a></li>
+                <li><a href="http://www.qfedu.com/member.html" rel="nofollow" id="userId" title="1756229479@qq.com">1756229479@qq.com</a></li>
                 <li class="my-cart"><a href="http://www.qfedu.com/member.html" rel="nofollow"><em>我的回购</em></a>
                     <div class="sub-cart">
                         <a href="http://www.qfedu.com/member/order.html" rel="nofollow">我的订单</a>
                         <a href="http://www.qfedu.com/member.html" rel="nofollow">帐户中心</a>
                         <a href="http://www.qfedu.com/member/juan.html" rel="nofollow">环保券<i>0</i>张</a>
-                        <a href="http://www.qfedu.com/member/logout.html" rel="nofollow">退出</a> </div>
+                        <a href="http://www.qfedu.com/member/logout.html" onclick="loginOff()" rel="nofollow">退出</a> </div>
                 </li>
                 <li class="item-daohang"><a class="item-daohang-nav" href="http://www.qfedu.com/service/map.html" rel="nofollow" title="麦淘乐手机回收网站导航">网站导航</a>
                     <div class="sub-nav2">
@@ -399,7 +399,8 @@
 <script type="text/javascript">
     var userID = window.localStorage.USERID;
     if(userID==null){
-
+        $("#userId").text(userID);
+        $("#userId").attr("title",userID);
     }
 </script>
 </body>

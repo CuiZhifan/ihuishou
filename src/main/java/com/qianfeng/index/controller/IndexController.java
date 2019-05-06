@@ -51,14 +51,16 @@ public class IndexController {
             if("null".equals(strings[1])){
                 strings[1] = null;
             }
-            if("null".equals(strings[2])){
-                strings[2] = null;
-            }
             if(strings[1]!=null){
                 name = strings[1];
             }
-            if(strings[2]!=null){
-                pageStr = strings[2];
+            if(strings.length>2) {
+                if ("null".equals(strings[2])) {
+                    strings[2] = null;
+                }
+                if (strings[2] != null) {
+                    pageStr = strings[2];
+                }
             }
         }
         List list = new ArrayList();

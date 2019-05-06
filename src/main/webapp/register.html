@@ -6,7 +6,7 @@
     <base href="/ihuishou/"/>
     <title>注册-回购网 -  手机回收网 | 二手手机交易 | 笔记本回收 | 平板回收</title>
     <link href="css/global.css" rel="stylesheet" type="text/css">
-    <link rel="icon" href="http://javen666.com/huishou/small_logo.ico"/>
+    <link rel="icon" href="/ihuishou/images/small_logo.ico"/>
     <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
     <script type="text/javascript" src="js/public.js"></script>
 </head>
@@ -23,9 +23,9 @@
     <input type="hidden" id="hidd_validate_code" name="hidd_validate_code" value="0ddc2edbac7d9d0db7ae5289772a6a00" />
     <input type="hidden" value="-1885694000" name="userToken" id="userToken"/>
     <!--注册-->
-    <div class="regist_top page"><a href=""><img src="http://javen666.com/huishou/main_logo.png"  style="vertical-align:middle"></a><span>免费注册</span></div>
+    <div class="regist_top page"><a href=""><img src="/ihuishou/images/main_logo.png"  style="vertical-align:middle"></a><span>免费注册</span></div>
     <div class="regist">
-        <div class="regist_l"><img src="http://javen666.com/huishou/main_img.png" /></div>
+        <div class="regist_l"><img src="/ihuishou/images/main_img.png" /></div>
         <div class="regist_r">
             <div class="c1"><span >用户名</span>
                 <div class="c1_bg">
@@ -53,9 +53,10 @@
                 <input name="input2" type="button" id="regbtn" value="立即注册"  class="input_btn3" onclick="submitForm(this);">
                 <div class="clear"></div>
             </div>
+            <div class="c1_txt"><span class="reg_tips" id="tipregbtn"></span></div>
             <p>
                 已有回购网账号，
-                <a href="login.jsp">点此登录</a>
+                <a href="login.html">点此登录</a>
             </p>
         </div>
         <div class="clear"></div>
@@ -68,11 +69,16 @@
         $("#tip"+id).html("<font class='reg_ts_font'>"+msg+"</font>");
     }
 
+    var KEY = window.localStorage.KEY;
+    $("#userToken").val(KEY);
+
+
 
     function checkInput(obj){
+        $("#istrue").val("");
         var id		=	$(obj).attr("id");
         var val		=	$(obj).val();
-        var error_img	=	"<img src='images/error.gif'/>";
+        var error_img	=	"";//<img src='images/error.gif'/>
 //        var yes_img = "<img src='/images/yes.gif'/>";
         //用户名检测
         if(id=='username'){
@@ -102,7 +108,7 @@
             }
         }
         if(id=='password'){
-            if(val==''	||	val.length<7){
+            if(val==''	||	val.length<6){
                 $("#tip"+id).html(error_img+"请输入6位以上密码！");
                 $("#istrue").val(0);
             }
@@ -127,11 +133,10 @@
 
     function check_username(id){
         var username_val	=	$.trim($("#"+id).val());
-        var usernameReg =/^[a-zA-Z]\w{5,14}$/;
         var flag = true;
-        if( ! usernameReg.test(username_val)) {
-            flag =	false;
-        }
+        // if( ! usernameReg.test(username_val)) {
+        //     flag =	false;
+        // }
         return flag;
     }
 
@@ -143,7 +148,7 @@
             $("#tipusername").html(error_img+"请输入用户名！");
             $("#istrue").val(0);
         }
-        if($("#password").val()==''	||	$("#password").val().length<7){
+        if($("#password").val()==''	||	$("#password").val().length<6){
             $("#tippassword").html(error_img+"请输入6位以上密码！");
             $("#istrue").val(0);
         }
@@ -161,16 +166,18 @@
         var passwordStr = $("#password").val();
         var userTokenStr = $("#userToken").val();
         var id		=	$(obj).attr("id");
-        $.post("user/register",
-                {userName:usernameStr, userPassword:passwordStr, userToken:userTokenStr
+        $.post("user/regist",
+                {username:usernameStr, password:passwordStr, key:userTokenStr
                 },function(data){
-                    if(data=="failed"){
+                    if(data[0]=="failed"){
                         $("#tip"+id).html(error_img+"对不起，该用户名已被注册！");
                         $("#istrue").val(0);
-                    }else if (data == "repeat"){
+                    }else if (data[0] == "repeat"){
                         alert("请不要重复提交！")
                     }else {
-                        window.location.href="good/home";
+                        window.localStorage.KEY = data[1];
+                        window.localStorage.USERID = data[2];
+                        window.location.href="html/index.html?brandId=0";
                     }
                 });
     }

@@ -1,15 +1,19 @@
 package com.qianfeng.commons.Listener;
 
+import com.qianfeng.commons.constant.URL;
 import com.qianfeng.redis.Service.IRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Component
 public class SpringListener implements ApplicationListener<ContextRefreshedEvent>{
     @Autowired
     private IRedisService service;
+
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {

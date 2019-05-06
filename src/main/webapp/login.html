@@ -76,6 +76,7 @@
 </body>
 </html>
 <script>
+    var KEY = window.localStorage.KEY;
     function submit_login_form(settle){
         if($.trim($("#username").val())==''	||	$.trim($("#username").val())=='用户名'){
             alert("请输入登录账户！");
@@ -90,6 +91,7 @@
 //        alert(settle);
         $.post("/ihuishou/user/login",
                 {
+                    key:KEY,
                     userName:$("#username").val(),
                     userPassword:$("#password").val(),
                     remeberMe:$("#remeberMe").val(),

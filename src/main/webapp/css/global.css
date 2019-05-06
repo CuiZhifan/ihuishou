@@ -1076,6 +1076,8 @@ dl.side_hot dd.no{ background:none}
 
 .regist_r .c1_txt{ height:24px; line-height:24px; padding:0 0 6px 130px;}
 
+.regist_r .c1_txt{}
+
 .regist_r .c1 .c1_bg, .regist_r .c2 .c1_bg{background:url(../images/bg3.jpg) no-repeat; width:305px; height:43px;overflow:hidden; padding:2px 1px; float:left;}
 
 .regist_r .c1 span, .regist_r .c2 span{ width:108px; font-size:14px; display:inline-block; line-height:47px; height:47px; float:left; text-align:right;  margin-right:18px;}

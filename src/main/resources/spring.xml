@@ -19,7 +19,9 @@
     com.qianfeng.order.controller,
     com.qianfeng.order.service,
     com.qianfeng.redis.Service,
-    com.qianfeng.commons.Listener"/>
+    com.qianfeng.commons.Listener,
+    com.qianfeng.commons.constant,
+    com.qianfeng.commons.Controller"/>
 
     <aop:aspectj-autoproxy/>
     <mvc:annotation-driven/>
