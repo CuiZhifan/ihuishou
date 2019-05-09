@@ -79,4 +79,20 @@
     <update id="updateFrozen">
         update tb_user set user_frozen = user_frozen + #{money} where user_id = #{userId};
     </update>
+
+    <insert id="addHistoryMoney">
+        insert into tb_history (type_id, history_money, history_time) values
+        (#{typeId},#{historyMoney},#{historyTime})
+    </insert>
+
+    <resultMap id="selectHistoryMoney" type="com.qianfeng.order.DTO.HistoryMoney">
+        <result property="typeId" column="order_phone_type" javaType="java.lang.Integer"/>
+        <result property="historyMoney" column="order_price" javaType="java.lang.Integer"/>
+        <result property="historyTime" column="order_create_time" javaType="java.sql.Timestamp"/>
+    </resultMap>
+
+    <select id="queryHistoryMoneyInfo" resultMap="selectHistoryMoney">
+        select order_phone_type,order_price,order_create_time
+        from tb_order where order_id = #{orderId};
+    </select>
 </mapper>

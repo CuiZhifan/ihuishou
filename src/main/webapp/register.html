@@ -175,8 +175,8 @@
                     }else if (data[0] == "repeat"){
                         alert("请不要重复提交！")
                     }else {
-                        window.localStorage.KEY = data[1];
-                        window.localStorage.USERID = data[2];
+                        window.localStorage.KEY = data[2];
+                        window.localStorage.USERID = data[1];
                         window.location.href="html/index.html?brandId=0";
                     }
                 });

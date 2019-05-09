@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class URL {
 
-    public static final String picURL = "http://localhost:80/ihuishou/";
+    public static final String picURL = "http://132.232.213.216:80/ihuishou/";
 
     public static final String removeOrderURL = "/ihuishou/price/removeCart/";
 

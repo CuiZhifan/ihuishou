@@ -4,6 +4,7 @@ import com.qianfeng.index.VO.IndexBrand;
 import com.qianfeng.index.VO.IndexFQuery;
 import com.qianfeng.index.VO.IndexType;
 import com.qianfeng.index.mapper.IQueryMapper;
+import com.qianfeng.index.service.IQueryservice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.List;
 public class TestIndex {
     @Autowired
     private IQueryMapper mapper;
+    @Autowired
+    private IQueryservice serice;
 
     @Test
     public void testCase1(){
@@ -51,6 +54,12 @@ public class TestIndex {
     @Test
     public void testCase5(){
         List<IndexType> types = mapper.queryTypesByName("%%");
+        types.forEach((d)-> System.out.println(d));
+    }
+
+    @Test
+    public void testCase6(){
+        List<IndexType> types = serice.queryTypesByName("i", "2");
         types.forEach((d)-> System.out.println(d));
     }
 }

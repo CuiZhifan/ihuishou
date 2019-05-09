@@ -69,7 +69,7 @@ public class IndexController {
         if (name!=null){
             String word = (String) session.getAttribute(name);
             session.setAttribute("word",null);
-            List<IndexType> types = service.queryTypesByName(word);
+            List<IndexType> types = service.queryTypesByName(word,pageStr);
             list.add(types);
         }else {
             List<IndexType> types;

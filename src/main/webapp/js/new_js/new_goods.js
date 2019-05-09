@@ -216,6 +216,10 @@ function new_show_price(url,act,func,elem_id,ifhuanxin){
 function new_addcart(url,act,key){
 	var gid			=	$("#gid").val();
 	if($("#if_show_price")	==	0)	return false;
+    if($("#issubmit").val()	==	0 && act=="add")	{
+    	alert("请不要重复添加购物车");
+    	return false;
+    }
 	$("#if_show_price").val(0);		//加锁
 	var typeid	=	1;
 	if($("#typeid").length == 1)	typeid = $("#typeid").val();
@@ -276,6 +280,7 @@ function new_addcart(url,act,key){
                     //alert(html);
                     $("#cart_tr_title").after(html);
 				}
+                $("#issubmit").val(0);
 				alert("已加入回购车");
 			}else if(obj[0]	==	2){
 				alert("数据传输有误");
@@ -288,12 +293,15 @@ function new_addcart(url,act,key){
 	if(act	==	'addcart'){	//加入回购车
 
 	}else if(act	==	'sub'){
-
 	}
-
-
 }
 
+function new_addcart1(url,act,key){
+    if($("#issubmit").val()	==	1){
+        new_addcart("/ihuishou/price/addCart","add",key);
+	}
+    new_addcart("/ihuishou/Order/HelloOrder","sub",key)
+}
 
 function	mx_mousemove(obj){
 	$(obj).find('.samp').show();

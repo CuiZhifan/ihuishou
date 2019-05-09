@@ -101,28 +101,28 @@
 <!--查询结果-->
 <div class="search_list">
     <div class="page">
-        <div class="current"><a href="">首页</a><span>></span><a href="goods.html">闲置回收</a>
-            <span>></span><a href="ershoushouji.html">手机</a>
+        <div class="current"><a href="">首页</a><span>></span><a href="index.html">闲置回收</a>
+            <span>></span><a href="index.html">手机</a>
             <em></em>
         </div>
         <div class="side_left">
             <dl class="side_list">
                 <dt>搜索结果分类</dt>
-                <dd class="item_on"><a href="ershoushouji.html" title="手机回收价格评估"><b
+                <dd class="item_on"><a href="index.html" title="手机回收价格评估"><b
                         class="item1">&nbsp;</b><em>手机</em><span>&nbsp;</span></a></dd>
-                <dd class=""><a href="ershoupingguo.html" title="苹果系列回收价格评估"><b
+                <dd class=""><a href="index.html" title="苹果系列回收价格评估"><b
                         class="item2">&nbsp;</b><em>苹果系列</em><span>&nbsp;</span></a></dd>
-                <dd class=""><a href="ershoupingban.html" title="平板电脑回收价格评估"><b
+                <dd class=""><a href="index.html" title="平板电脑回收价格评估"><b
                         class="item3">&nbsp;</b><em>平板电脑</em><span>&nbsp;</span></a></dd>
-                <dd class=""><a href="ershoubijiben.html" title="笔记本回收价格评估"><b
+                <dd class=""><a href="index.html" title="笔记本回收价格评估"><b
                         class="item4">&nbsp;</b><em>笔记本</em><span>&nbsp;</span></a></dd>
-                <dd class=""><a href="ershoushumaxiangji.html" title="数码相机回收价格评估"><b
+                <dd class=""><a href="index.html" title="数码相机回收价格评估"><b
                         class="item5">&nbsp;</b><em>数码相机</em><span>&nbsp;</span></a></dd>
-                <dd class=""><a href="ershouyouxiji.html" title="游戏机回收价格评估"><b
+                <dd class=""><a href="index.html" title="游戏机回收价格评估"><b
                         class="item6">&nbsp;</b><em>游戏机</em><span>&nbsp;</span></a></dd>
-                <dd class=""><a href="ershoujingtou.html" title="镜头回收价格评估"><b class="item7">&nbsp;</b><em>镜头</em><span>&nbsp;</span></a>
+                <dd class=""><a href="index.html" title="镜头回收价格评估"><b class="item7">&nbsp;</b><em>镜头</em><span>&nbsp;</span></a>
                 </dd>
-                <dd class="last"><a href="wurenji.html" title="无人机回收价格评估"><b class="item8">&nbsp;</b><em>无人机</em><span>&nbsp;</span></a>
+                <dd class="last"><a href="index.html" title="无人机回收价格评估"><b class="item8">&nbsp;</b><em>无人机</em><span>&nbsp;</span></a>
                 </dd>
             </dl>
             <dl class="side_hot">
@@ -134,7 +134,7 @@
                     </div>
                     <div class="txt2">
                         <p style="width:120px;">
-                            <a href="goods/info/17015.html" title="ipad mini回收价格评估">ipad mini</a></p>462
+                            <a href="info.html" title="ipad mini回收价格评估">ipad mini</a></p>462
                     </div>
                     <div class="clear"></div>
                 </dd>
@@ -147,11 +147,11 @@
         <div class="side_right" id="allBrand">
             <!--全部手机品牌-->
             <div class="brand">
-                <div class="title2"><span><a href="goods.html"><strong>手机</strong> 品牌</a></span></div>
+                <div class="title2"><span><a href="index.html"><strong>手机</strong> 品牌</a></span></div>
                 <div class="brand_main">
                     <div class="brand_hot" >
                         <!--<span id="" style="display: none">{{brand.brandId}}</span>-->
-                        <a href="/ihuishou/html/index.html?brandId=0">全部</a>
+                        <a href="/ihuishou/html/index.html">全部</a>
                         <em>|</em>
                         <template v-for="brand in brands">
                             <a :href="'/ihuishou/html/index.html?brandId='+brand.brandId">{{brand.brandName}}</a>
@@ -169,7 +169,7 @@
                     <dd v-for="type in types">
                         <div class="pic_list_box">
                             <div class="pic_list_img"><a :href="'/ihuishou/html/info.html?typeId='+type.typeId" :title="type.typeName+'回收价格评估'"><img
-                                    :src="'http://localhost:80/ihuishou/'+type.typePic" width="180"
+                                    :src="'http://132.232.213.216:80/ihuishou/'+type.typePic" width="180"
                                     height="135" :alt="type.typeName+'闲置回收价格评估'"/></a></div>
                             <p class="name">{{type.typeName}}</p>
                             <!--<p class="price">回收价：<em>￥3080</em></p>-->
@@ -182,14 +182,15 @@
                 </dl>
                 <div class="clear"></div>
                 <div class="pageStr">
-                    <div class="ihuigo_page"><span class="cur_link">1</span><span><a
-                            v-bind:href="Hurl+'&page=2'">2</a></span><span><a
-                            v-bind:href="Hurl+'&page=3'">3</a></span><span><a
-                            v-bind:href="Hurl+'&page=4'">4</a></span><span><a
-                            v-bind:href="Hurl+'&page=5'">5</a></span><span><a
-                            v-bind:href="Hurl+'&page=6'">6</a></span><span
-                            class="next_link"><a v-bind:href="Hurl+'&page='+next">下一页</a></span><span class="last_link"><a
-                            href="ershoushouji/232.html">尾页</a></span></div>
+                    <div class="ihuigo_page">
+                        <span><a v-bind:href="Hurl+'&page=1'">1</a></span>
+                        <span><a v-bind:href="Hurl+'&page=2'">2</a></span>
+                        <span><a v-bind:href="Hurl+'&page=3'">3</a></span>
+                        <span><a v-bind:href="Hurl+'&page=4'">4</a></span>
+                        <span><a v-bind:href="Hurl+'&page=5'">5</a></span>
+                        <span><a v-bind:href="Hurl+'&page=6'">6</a></span>
+                        <span class="next_link"><a v-bind:href="Hurl+'&page='+next">下一页</a></span>
+                        <span class="last_link"><a href="index.html">尾页</a></span></div>
                 </div>
             </div>
         </div>
@@ -211,16 +212,16 @@
     <div class="page2">
         <dl class="foot_list1">
             <dt>关于我们</dt>
-            <dd><a href="service/about.html" rel="nofollow" target="_blank" title="麦淘乐高价在线手机回收平台">关于麦淘乐</a></dd>
-            <dd><a href="service/contact.html" target="_blank" rel="nofollow" title="麦淘乐手机回收联系方式">联系我们</a></dd>
-            <dd><a href="service/join.html" target="_blank" rel="nofollow" title="麦淘乐长期招聘爱好手机回收行业的小伙伴">人才招聘</a></dd>
+            <dd><a href="index.html" rel="nofollow" target="_blank" title="麦淘乐高价在线手机回收平台">关于麦淘乐</a></dd>
+            <dd><a href="index.html" target="_blank" rel="nofollow" title="麦淘乐手机回收联系方式">联系我们</a></dd>
+            <dd><a href="index.html" target="_blank" rel="nofollow" title="麦淘乐长期招聘爱好手机回收行业的小伙伴">人才招聘</a></dd>
         </dl>
         <dl class="foot_list2">
             <dt>服务</dt>
-            <dd><a href="service/terms.html" target="_blank" rel="nofollow" title="手机回收常见问题与解答">服务条款</a></dd>
-            <dd><a href="service/suggestions.html" target="_blank" rel="nofollow" title="感谢您对手机回收相关问题的投诉与建议">投诉建议</a>
+            <dd><a href="index.html" target="_blank" rel="nofollow" title="手机回收常见问题与解答">服务条款</a></dd>
+            <dd><a href="index.html" target="_blank" rel="nofollow" title="感谢您对手机回收相关问题的投诉与建议">投诉建议</a>
             </dd>
-            <dd><a href="service/map.html" target="_blank" title="麦淘乐的网站地图导航">网站地图</a></dd>
+            <dd><a href="index.html" target="_blank" title="麦淘乐的网站地图导航">网站地图</a></dd>
         </dl>
         <dl class="foot_list3">
             <dt>客服热线</dt>
@@ -277,17 +278,17 @@
                 <!--在线客服-->
                 <!--微信二维码-->
                 <div class="mui-mbar-weixin">
-                    <div class="mui-mbar-go"><a href="service/suggestions.html" rel="nofollow" target="_blank"><img
+                    <div class="mui-mbar-go"><a href="#" rel="nofollow" target="_blank"><img
                             src="../images/new_images/cart_icon2.png"/></a></div>
-                    <div class="mui-weima"><a href="service/suggestions.html" rel="nofollow" target="_blank"><img
+                    <div class="mui-weima"><a href="#" rel="nofollow" target="_blank"><img
                             src="../images/new_images/weixin.png" width="192" height="192"/></a></div>
                 </div>
                 <!--微信二维码-->
                 <!--投诉建议-->
                 <div class="mui-mbar-tousu mui-mbar-all">
-                    <div class="mui-mbar-go"><a href="service/suggestions.html" rel="nofollow" target="_blank"><img
+                    <div class="mui-mbar-go"><a href="#" rel="nofollow" target="_blank"><img
                             src="../images/new_images/cart_icon3.png"/></a></div>
-                    <div class="mui-jianyi mui-mbar-last"><a href="service/suggestions.html" rel="nofollow"
+                    <div class="mui-jianyi mui-mbar-last"><a href="#" rel="nofollow"
                                                              target="_blank">投诉建议</a></div>
                 </div>
                 <!--投诉建议-->
@@ -314,8 +315,7 @@
                 <!--结算-->
                 <div class="mui-jiesuan">
                     <p>已选<em class="cart_total_items">0</em>台共计<em id="cart_total">￥0</em></p>
-                    <input type="button" value="去结算" class="mui-button"
-                           onclick="gocart('ajax/check_iflogin.html','order/cart.html')"/>
+                    <input type="button" value="去结算" class="mui-button"/>
                 </div>
                 <!--结算-->
             </div>
@@ -330,14 +330,14 @@
     DD_belatedPNG.fix('img,.banner ul, li, dl, dt, dd, span, em, div, i, samp, a, b, .kuang');
 </script>
 <![endif]-->
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/Vue.js"></script>
+<script src="../js/axios.js"></script>
 <script src="../js/login.js"></script>
 <script type="text/javascript">
     var key = window.localStorage.KEY;
     if(key!=null){
         $("#loginoff").text("登出");
-        $("#loginoff").attr("href","index.html?brandId=0");
+        $("#loginoff").attr("href","index.html");
         $("#loginoff").attr("onClick","loginOff()");
     }
 
@@ -350,6 +350,9 @@
     var id = GetQueryString("brandId");
     var name = GetQueryString("name");
     var page = GetQueryString("page");
+    if (id==null){
+        id=0;
+    }
     var next = 0;
     if(page!=null||page<1){
         next = 2;

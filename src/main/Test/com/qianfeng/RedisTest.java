@@ -120,4 +120,16 @@ public class RedisTest {
         Set<String> keys = redisTemplate.keys("ihuishou-*");
         Long delete = redisTemplate.delete(keys);
     }
+
+    public int sum(int n){
+        int a;
+        if(n==1)a=1;
+        else a=sum(n-1)+n;
+        return a;
+    }
+
+    @Test
+    public void testCase14(){
+        System.out.println(sum(1000));
+    }
 }

@@ -11,5 +11,5 @@ public interface IQueryservice {
     List<IndexBrand> indexQueryAllType(int brandId);
     List<IndexBrand> indexQueryBrand();
     List<IndexType> indexQueryType(int brandId);
-    List<IndexType> queryTypesByName(String word);
+    List<IndexType> queryTypesByName(String word,String page);
 }

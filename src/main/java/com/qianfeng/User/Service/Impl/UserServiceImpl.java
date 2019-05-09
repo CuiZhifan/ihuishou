@@ -91,20 +91,19 @@ public class UserServiceImpl implements IUserService {
         //得到新用户Id
         Integer NUserId = getId.getUserId();
         if (attribute == null){
-            Messages messages = new Messages();
-            messages.setUserId(NUserId);
-            key = UUID.randomUUID().toString().replace("-","").substring(0,10);
-            session.setAttribute(key,messages);
-            return "ok-"+NUserId+"-"+key;
-        }
-
-        Integer OUserId = attribute.getUserId();
-        if (OUserId == null){
+            attribute = new Messages();
             attribute.setUserId(NUserId);
+            key = UUID.randomUUID().toString().replace("-","").substring(0,10);
             session.setAttribute(key,attribute);
             return "ok-"+NUserId+"-"+key;
         }
+        Integer OUserId = attribute.getUserId();
+        if (OUserId == null){
+            OUserId = NUserId;
+        }
         mapper.updateCart(NUserId,OUserId);
+        attribute.setUserId(NUserId);
+        session.setAttribute(key,attribute);
         return "ok-"+NUserId+"-"+key;
     }
 }

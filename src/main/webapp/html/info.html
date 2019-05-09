@@ -10,7 +10,7 @@
     <meta name="applicable-device" content="pc">
  <link href="http://www.qfedu.com/favicon.ico" type="image/x-icon" rel="Icon">
     <link href="../css/new_css/global.css" rel="stylesheet" type="text/css">
-    <script src="../js/new_js/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="../js/new_js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="../js/new_js/new_public.js" type="text/javascript"></script>
     <script type="text/javascript">
     </script>
@@ -25,6 +25,63 @@
     </style>
 </head>
 <body>
+<!--购物车-->
+<div class="mui-mbar">
+    <!--黑色栏-->
+    <div class="mui-mbar-mask">
+        <div class="mui-mbar-gwc">
+            <div class="mui-mbar-wz"><em class="cart_total_items">0</em>
+                <p><img src="../images/cart.png"></p>
+                <span>回购车</span>
+            </div>
+        </div>
+        <!--在线客服-->
+        <div class="mui-mbar-kefu mui-mbar-all">
+            <div class="mui-mbar-go"><a rel="nofollow" href="javascript:void(0)" onclick="zixunserver('/index/zixunserver.html')"><img src="../images/cart_icon1.png"></a></div>
+            <div class="mui-zaixian mui-mbar-last"><a href="javascript:void(0)" onclick="zixunserver('/index/zixunserver.html')">在线客服</a></div>
+        </div>
+        <!--在线客服-->
+        <!--微信二维码-->
+        <div class="mui-mbar-weixin">
+            <div class="mui-mbar-go"><a href="#" rel="nofollow" target="_blank"><img src="../images/cart_icon2.png"></a></div>
+            <div class="mui-weima"><a href="#" rel="nofollow" target="_blank"><img src="../images/weixin.png" width="192" height="192"></a></div>
+        </div>
+        <!--微信二维码-->
+        <!--投诉建议-->
+        <div class="mui-mbar-tousu mui-mbar-all">
+            <div class="mui-mbar-go"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/cart_icon3.png"></a></div>
+            <div class="mui-jianyi mui-mbar-last"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank">投诉建议</a></div>
+        </div>
+        <!--投诉建议-->
+        <!--返回顶部-->
+        <div class="mui-mbar-top mui-mbar-all">
+            <div class="mui-mbar-go"><a rel="nofollow" href="javascript:goTop();" class="sidetop"><img src="../images/go_top.png"></a></div>
+            <div class="mui-fanhui mui-mbar-last">返回顶部</div>
+        </div>
+        <!--返回顶部-->
+    </div>
+    <!--黑色栏-->
+    <!--购物车-->
+    <div class="mui-mbar-cart">
+        <div class="mui-list">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-list">
+                <tbody><tr id="cart_tr_title">
+                    <th class="table-padding">机型</th>
+                    <th width="100">&nbsp;</th>
+                    <th width="68">评估价</th>
+                </tr>
+                </tbody></table>
+        </div>
+        <!--结算-->
+        <div class="mui-jiesuan">
+            <p>已选<em class="cart_total_items">0</em>台共计<em id="cart_total">￥0</em></p>
+            <input type="button" value="去结算" class="mui-button">
+        </div>
+        <!--结算-->
+    </div>
+    <!--购物车-->
+</div>
+<!--购物车-->
 <input type="hidden" id="package_id" name="package_id" value="-1"/>
 <!--<link rel="stylesheet" type="text/css" href="../css/alert_zhe.css"/>-->
 <!--<script type="text/javascript" src="../js/alert_zhe.js"></script>-->
@@ -48,23 +105,23 @@
         </div>
         <div class="shortcut-right">
             <ul id="login_show">
-                <li><a href="http://www.qfedu.com/member.html" rel="nofollow" id="userId" title="1756229479@qq.com">1756229479@qq.com</a></li>
-                <li class="my-cart"><a href="http://www.qfedu.com/member.html" rel="nofollow"><em>我的回购</em></a>
+                <li><a href="#" rel="nofollow" id="userId" title="1756229479@qq.com">1756229479@qq.com</a></li>
+                <li class="my-cart"><a href="#" rel="nofollow"><em>我的回购</em></a>
                     <div class="sub-cart">
-                        <a href="http://www.qfedu.com/member/order.html" rel="nofollow">我的订单</a>
-                        <a href="http://www.qfedu.com/member.html" rel="nofollow">帐户中心</a>
-                        <a href="http://www.qfedu.com/member/juan.html" rel="nofollow">环保券<i>0</i>张</a>
-                        <a href="http://www.qfedu.com/member/logout.html" onclick="loginOff()" rel="nofollow">退出</a> </div>
+                        <a href="#" rel="nofollow">我的订单</a>
+                        <a href="member.html" rel="nofollow">帐户中心</a>
+                        <a href="#" rel="nofollow">环保券<i>0</i>张</a>
+                        <a href="#" class="loginOff" rel="nofollow">退出</a> </div>
                 </li>
-                <li class="item-daohang"><a class="item-daohang-nav" href="http://www.qfedu.com/service/map.html" rel="nofollow" title="麦淘乐手机回收网站导航">网站导航</a>
+                <li class="item-daohang"><a class="item-daohang-nav" href="#" rel="nofollow" title="麦淘乐手机回收网站导航">网站导航</a>
                     <div class="sub-nav2">
                         <ul>
                             <li>
                                 <dl>
                                     <dt>主要频道</dt>
-                                    <dd><a target="_blank" href="http://www.qfedu.com/goods.html" title="闲置二手手机回收价格评估">旧机回收</a></dd>
-                                    <dd><a target="_blank" href="http://www.qfedu.com/youpin.html" title="靓机优选手机抢购">靓机优选</a></dd>
-                                    <dd><a target="_blank" href="http://www.qfedu.com/huanxin.html" title="二手手机以旧换新活动">旧机换新</a></dd>
+                                    <dd><a target="_blank" href="index.html" title="闲置二手手机回收价格评估">旧机回收</a></dd>
+                                    <dd><a target="_blank" href="#" title="靓机优选手机抢购">靓机优选</a></dd>
+                                    <dd><a target="_blank" href="#" title="二手手机以旧换新活动">旧机换新</a></dd>
                                 </dl>
                             </li>
                             <!--               <li>-->
@@ -77,8 +134,8 @@
                             <!--               <li>-->
                             <dl>
                                 <dt>客户服务</dt>
-                                <dd><a href="http://www.qfedu.com/service/terms.html" rel="nofollow" target="_blank" title="麦淘乐手机回收服务条款">服务条款</a></dd>
-                                <dd><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank" title="手机回收问题投诉与建议">投诉建议</a></dd>
+                                <dd><a href="#" rel="nofollow" target="_blank" title="麦淘乐手机回收服务条款">服务条款</a></dd>
+                                <dd><a href="#" rel="nofollow" target="_blank" title="手机回收问题投诉与建议">投诉建议</a></dd>
                                 <!--  <dd><a onClick="zixunserver('/index/zixunserver.html');" href="javascript:void(0)" rel="nofollow" target="_blank">在线客服</a></dd>-->
                             </dl>
 
@@ -93,7 +150,7 @@
 </div>
 <div class="header">
     <div class="page">
-        <h1 class="logo"><a href=""><img src="../images/new_images/logo.png" width="171" height="43"
+        <h1 class="logo"><a href="#"><img src="../images/new_images/logo.png" width="171" height="43"
                                          title="二手手机回收交易网"/></a></h1>
 
     </div>
@@ -111,8 +168,8 @@
         <div class="new_search_btn" style="position:absolute; left:-40px; top:-11px; cursor:pointer;"><img
                 src="../images/new_images/search_btn.png" alt="搜索您要评估价格的机型"/></div>
         
-        <div style="height:30px; line-height:30px; font-size:14px;"><a href="">首页</a> &gt;<a
-                href="ershoushouji.html">手机</a> &gt;<a id="top-a" href="ershouiphone.html"></a> &gt; <span id="top-span"></span>
+        <div style="height:30px; line-height:30px; font-size:14px;"><a href="index.html">首页</a> &gt;<a
+                href="index.html">手机</a> &gt;<a id="top-a" href="index.html"></a> &gt; <span id="top-span"></span>
         </div>
         <div class="heat_l">
             <div class="heat_img">
@@ -275,63 +332,7 @@
 <!--隐藏的评估描叙选项start-->
 <div style="display:none; background-color:#CCCCCC;">
 </div>
-<!--购物车-->
-<div class="mui-mbar">
-    <!--黑色栏-->
-    <div class="mui-mbar-mask">
-        <div class="mui-mbar-gwc">
-            <div class="mui-mbar-wz"><em class="cart_total_items">0</em>
-                <p><img src="../images/cart.png"></p>
-                <span>回购车</span>
-            </div>
-        </div>
-        <!--在线客服-->
-        <div class="mui-mbar-kefu mui-mbar-all">
-            <div class="mui-mbar-go"><a rel="nofollow" href="javascript:void(0)" onclick="zixunserver('/index/zixunserver.html')"><img src="../images/cart_icon1.png"></a></div>
-            <div class="mui-zaixian mui-mbar-last"><a href="javascript:void(0)" onclick="zixunserver('/index/zixunserver.html')">在线客服</a></div>
-        </div>
-        <!--在线客服-->
-        <!--微信二维码-->
-        <div class="mui-mbar-weixin">
-            <div class="mui-mbar-go"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/cart_icon2.png"></a></div>
-            <div class="mui-weima"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/weixin.png" width="192" height="192"></a></div>
-        </div>
-        <!--微信二维码-->
-        <!--投诉建议-->
-        <div class="mui-mbar-tousu mui-mbar-all">
-            <div class="mui-mbar-go"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank"><img src="../images/cart_icon3.png"></a></div>
-            <div class="mui-jianyi mui-mbar-last"><a href="http://www.qfedu.com/service/suggestions.html" rel="nofollow" target="_blank">投诉建议</a></div>
-        </div>
-        <!--投诉建议-->
-        <!--返回顶部-->
-        <div class="mui-mbar-top mui-mbar-all">
-            <div class="mui-mbar-go"><a rel="nofollow" href="javascript:goTop();" class="sidetop"><img src="../images/go_top.png"></a></div>
-            <div class="mui-fanhui mui-mbar-last">返回顶部</div>
-        </div>
-        <!--返回顶部-->
-    </div>
-    <!--黑色栏-->
-    <!--购物车-->
-    <div class="mui-mbar-cart">
-        <div class="mui-list">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-list">
-                <tbody><tr id="cart_tr_title">
-                    <th class="table-padding">机型</th>
-                    <th width="100">&nbsp;</th>
-                    <th width="68">评估价</th>
-                </tr>
-                </tbody></table>
-        </div>
-        <!--结算-->
-        <div class="mui-jiesuan">
-            <p>已选<em class="cart_total_items">0</em>台共计<em id="cart_total">￥0</em></p>
-            <input type="button" value="去结算" class="mui-button" onclick="gocart('/ajax/check_iflogin.html','/order/cart.html')">
-        </div>
-        <!--结算-->
-    </div>
-    <!--购物车-->
-</div>
-<!--购物车-->
+
 <!--隐藏的评估描叙选项end-->
 <script>
     $(document).ready(function () {
@@ -360,42 +361,8 @@
 <![endif]-->
 <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<script src="../js/info.js"></script>
-<script src="../js/login.js"></script>
-<!--<script type="text/javascript">-->
-    <!--function GetQueryString(name)-->
-    <!--{-->
-        <!--var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");-->
-        <!--var r = window.location.search.substr(1).match(reg);-->
-        <!--if(r!=null)return  unescape(r[2]); return null;-->
-    <!--}-->
-    <!--var id = GetQueryString("typeId");-->
-    <!--new Vue({-->
-        <!--el:"#TOPINFO",-->
-        <!--data:{-->
-            <!--phone:null,-->
-            <!--historymoney:null,-->
-            <!--page1:null,-->
-            <!--page2:null,-->
-            <!--page3:null-->
-        <!--},-->
-        <!--mounted(){-->
-            <!--var url = "/ihuishou/info/property/"+id;-->
-            <!--setTimeout(() => {-->
 
-            <!--}, 20);-->
-            <!--axios.get(url)-->
-                <!--.then(response => {-->
-                    <!--this.page1 = response.data[0];-->
-                    <!--this.page2 = response.data[1];-->
-                    <!--this.page3 = response.data[2];-->
-                    <!--this.historymoney = response.data[3];-->
-                    <!--this.phone = response.data[4];-->
-                    <!--// this.phone.typeMoney = this.phone.typeMoney/100;-->
-                <!--})-->
-        <!--}-->
-    <!--});-->
-<!--</script>-->
+
 <script type="text/javascript">
     var userID = window.localStorage.USERID;
     if(userID==null){
@@ -403,5 +370,8 @@
         $("#userId").attr("title",userID);
     }
 </script>
+
+<script src="../js/info.js" type="text/javascript"></script>
+<script src="../js/login.js" type="text/javascript"></script>
 </body>
 </html>

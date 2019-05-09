@@ -5,6 +5,7 @@ import com.qianfeng.Price.VO.ReturnCart;
 import com.qianfeng.Price.service.IPriceService;
 import com.qianfeng.commons.DTO.Messages;
 import com.qianfeng.commons.constant.URL;
+import com.qianfeng.order.DTO.HistoryMoney;
 import com.qianfeng.order.DTO.OrderIdList;
 import com.qianfeng.order.DTO.ReceiveOrder;
 import com.qianfeng.order.PO.TbChit;
@@ -64,6 +65,7 @@ public class OrderController {
             TbOrder tbOrder = new TbOrder(receiveOrder);
             tbOrder.setOrderId(d.getOrderId());
             service.updateOrder(tbOrder);
+            service.insertHistoryMoney(d.getOrderId());
         });
         if("y".equals(receiveOrder.getIfbaoxian())){
             if(receiveOrder.getBaoxian_name()!=null&&receiveOrder.getBaoxian_name().length()>0&&

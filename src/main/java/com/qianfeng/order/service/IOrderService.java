@@ -16,4 +16,6 @@ public interface IOrderService {
     TbOrder queryOrder(String OrderId);
 
     void updateFrozenMoney(int money,int userId);
+
+    void insertHistoryMoney(String OrderId);
 }

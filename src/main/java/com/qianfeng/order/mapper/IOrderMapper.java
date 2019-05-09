@@ -1,5 +1,6 @@
 package com.qianfeng.order.mapper;
 
+import com.qianfeng.order.DTO.HistoryMoney;
 import com.qianfeng.order.DTO.OrderIdList;
 import com.qianfeng.order.PO.TbChit;
 import com.qianfeng.order.PO.TbOrder;
@@ -20,4 +21,8 @@ public interface IOrderMapper {
     TbOrder queryOrder(@Param("orderId") String OrderId);
 
     void updateFrozen(@Param("money") int money,@Param("userId") int userId);
+
+    void addHistoryMoney(HistoryMoney historyMoney);
+
+    HistoryMoney queryHistoryMoneyInfo(@Param("orderId") String OrderId);
 }

@@ -40,7 +40,7 @@ $.ajax({
         $("#top-a").text(phone.brandName);
         $("#top-span").text(phone.typeName);
         $("#gid").val(phone.typeId);
-        $(".heat_img").find("img").attr("src","http://localhost:80/ihuishou/"+phone.typePic);
+        $(".heat_img").find("img").attr("src","http://132.232.213.216:80/ihuishou/"+phone.typePic);
         $(".heat_img").find("img").attr("alt",phone.typeName+"回收价格评估");
         $(".heat_name").first().text(phone.typeName);
         $(".heat_ts").find("em").text(phone.typeMoney/100);

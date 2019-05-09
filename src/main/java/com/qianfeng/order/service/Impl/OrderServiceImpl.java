@@ -2,6 +2,7 @@ package com.qianfeng.order.service.Impl;
 
 import com.qianfeng.User.Mapper.IUserMapper;
 import com.qianfeng.User.PO.TbUser;
+import com.qianfeng.order.DTO.HistoryMoney;
 import com.qianfeng.order.DTO.OrderIdList;
 import com.qianfeng.order.PO.TbChit;
 import com.qianfeng.order.PO.TbOrder;
@@ -47,5 +48,11 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public void updateFrozenMoney(int money, int userId) {
         mapper.updateFrozen(money*100,userId);
+    }
+
+    @Override
+    public void insertHistoryMoney(String OrderId) {
+        HistoryMoney historyMoney = mapper.queryHistoryMoneyInfo(OrderId);
+        mapper.addHistoryMoney(historyMoney);
     }
 }
